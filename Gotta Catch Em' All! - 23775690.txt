@@ -1,0 +1,47 @@
+#include <iostream>
+#include<vector>
+#include<algorithm>
+#include<string>
+using namespace std;
+ 
+int main()
+{
+    string s  ;
+    cin>>s ;
+    int count =  0 ;
+    int countB = 0 ;
+    int counta=0 , countu = 0  , countl = 0  ,countb= 0 ,countr =  0 ,counts = 0 ;
+  for( int i  = 0  ; i< s.size() ;  ++i)
+  {
+      if(s[i] == 'B' )
+        countB++;
+      if(s[i] == 'a' )
+        counta++;
+        if(s[i] == 'u' )
+        countu++;
+        if(s[i] == 'l' )
+        countl++;
+        if(s[i] == 'b' )
+        countb++;
+        if(s[i] == 'r' )
+        countr++;
+        if(s[i] == 's' )
+        counts++;
+ 
+  }
+ 
+      int c = min(counta ,countu) ;
+      int d = min(countl,countb) ;
+      int e =  min(counts,countr);
+      int f = min(d,e) ;
+      int g = min(f,countB) ;
+       int x = min(f,g) ;
+      int z = c /2 ;
+ 
+      count = min(z,x) ;
+ 
+ 
+ 
+cout<<count;
+    return 0;
+}
