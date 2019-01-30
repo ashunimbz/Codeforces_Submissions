@@ -1,0 +1,101 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <utility>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int 
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie()  
+#define MOD  1000000007 
+
+
+
+
+int main(){
+  IOS ; 
+  ll n ; 
+  cin>>n   ;
+
+  unordered_map< string , unordered_set<string> > um  ;
+  for(int i  =  0 ; i < n ; ++i)  {
+     string s ; 
+     cin>>s ; 
+    int v ;
+    cin>>v  ;
+     unordered_set<string>se; 
+     bool already = false ; 
+     if(um.find(s) != um.end())
+      already  =  true ; 
+    for(int y   = 0 ; y < v ; ++y)
+    {
+
+       string a ; 
+       cin>>a  ; 
+       if(already)
+        um[s].insert(a) ; 
+      else
+       se.insert(a) ; 
+    }
+    if(!already)
+    um.insert({s , se})  ;
+  }
+  unordered_map< string , unordered_set<string> >suffix ; 
+
+  for(auto  p   :  um)
+  {
+      unordered_set<string>yo = p.second ; 
+      string jaja = p.first ; 
+      for(string qw : yo)
+        { 
+            string la = "" ; 
+            for(int i   = qw.length() - 1 ; i > 0 ;   --i)
+            {
+               la = qw[i] + la ; 
+               suffix[jaja].insert(la) ; 
+            }
+        }
+
+       
+  }
+
+  // for(auto p :suffix)
+  //   {
+  //      cout<<p.first<<" "  ;
+  //      for(auto j : p.second)
+  //      cout<<j<<" " ;  
+  //    cout<<"\n\n"  ;
+  //   }
+  auto po  = um.begin() ; 
+  cout<<um.size()<<"\n" ; 
+  while(po  != um.end())
+  {
+     string cur =  (*po).first    ;
+     cout<<cur<<" "; 
+     //cout<<(*po).second.size()<<" ";
+     auto  k = (*po).second.begin() ; 
+     vector<string>ans ; 
+     while(k != (*po).second.end())
+     {
+      string name =  *k ;  
+      if(suffix[cur].find(name) == suffix[cur].end())
+        ans.push_back(name) ; 
+      ++k ; 
+     }
+     cout<<ans.size() <<" " ; 
+     for(string zaza:ans)
+      cout<<zaza<<" " ; 
+     cout<<"\n" ; 
+     ++po ;
+  }
+ 
+ 
+return   0 ;
+} 
