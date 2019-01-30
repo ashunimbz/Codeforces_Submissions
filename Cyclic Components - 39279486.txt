@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int
+#define mod 1000000007
+#define inf  10000000000
+using namespace std ;  
+ll cycles =  0 ; 
+ll n , m  ; 
+vector<ll> adj[200005] ; 
+bool visited[200005] ;
+
+bool ans1 = true;
+void dfs(ll node, ll par)
+{
+  visited[node]  = true ;
+  if(adj[node].size() ==  1)
+  ans1 = false  ;   
+  for(int child : adj[node])
+  {
+     if(child == par)
+      continue ; 
+       if(visited[child] )
+       {
+         cycles++ ;  
+         continue ; 
+       }
+       dfs(child ,node) ; 
+  }
+} 
+
+int main()
+{
+
+ ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+  cin>>n>>m  ; 
+for(ll i  = 0 ;  i < m  ;++i)
+{
+   ll a ,  b  ;cin>>a>>b  ; 
+   adj[a].push_back(b) ;  
+   adj[b].push_back(a) ; 
+}
+ll ans = 0 ;  
+for(ll i  = 1  ;  i <= n ; ++i)
+{
+  ans1  =true  ; 
+   cycles    = 0 ;  
+   if( !visited[i])
+    {
+       dfs(i,i) ;
+    } 
+    
+  if(cycles == 2 && ans1)
+    ans++ ; 
+}
+cout<<ans ; 
+  return   0 ;   }
