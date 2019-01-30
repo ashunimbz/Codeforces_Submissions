@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll    long long int 
+#define MOD 1000000007
+#define inf  2000000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+ll n ,  m ;  
+ll arr[100005] ;
+ll x , d ; 
+
+void posi(ll x ,  ll y)
+{  
+   for(ll   i  =1 ;  i<= n  ;++i)
+   {
+     arr[i] += x + y * abs( i  - 1) ; 
+   }
+}
+
+void negi(ll x ,ll y)
+{  
+   for(ll   i  =1 ;  i<= n  ;++i)
+   {
+     arr[i] +=  y * abs( i  - (n + 1)/2) ; 
+   }
+}
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+   cin>>n>> m ;  
+   cout<<setprecision(20)<<fixed ; 
+   ll xadded = 0 ; 
+   ll start =  0 ;  
+   ll mid = 0  ; 
+   for(ll  i  = 0 ; i < m ; ++i)
+   {
+      cin>>x>>d ;
+      xadded += x ;    
+     if(d >= 0 )
+      start += d;  
+     else
+      mid += d ; 
+   }
+   posi(xadded  , start) ;
+   negi(xadded , mid); 
+   long double sum  =  0 ; 
+   for(ll  i  = 1 ; i <=n ; ++i)
+    sum += arr[i] ;  
+
+  cout<<sum/n;
+   return   0  ;
+
+}
