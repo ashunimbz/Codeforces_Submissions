@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll  long long int
+#define mod 1000000007
+#define inf  20000000000
+#define eps  0.0000000000001
+using namespace std ;  
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+  ll l ,r ,x ,y ;cin>>l>>r>>x>>y  ;  
+  ll yo  = x * y  ;  
+
+  vector<pair< ll ,  ll > >factors ; 
+  for(ll  j  = 1  ;  j <= sqrt(y)  ;++j)
+  {
+     if(y % j == 0)
+     {
+       factors.push_back({ j , y/j}) ; 
+     }
+  }
+   set< pair <ll ,ll > >mp ;  
+  for(auto yoda : factors)
+  {
+       ll val1 = yoda.first   ; 
+       ll val2 = yoda.second ;  
+
+       if(yo % val1 == 0 )
+       {
+          if(yo/val1 >= l && yo/val1 <= r && val1 >= l && val1 <= r)
+          {
+             if(__gcd(yo/val1  , val1) == x){
+             mp.insert({val1 , yo/val1}) ; 
+             mp.insert({ yo/val1  ,val1}) ; 
+           }
+          }
+       }
+       if(yo % val2 == 0 )
+       {
+          if(yo/val2 >= l && yo/val2 <= r && val2 >= l && val2 <= r)
+          {
+              if(__gcd(yo/val2  , val2) == x){
+             mp.insert({val2 , yo/val2}) ; 
+             mp.insert({ yo/val2  ,val2}) ; 
+           }
+          }
+       }
+  }
+  cout<<mp.size();
+  
+   
+return   0 ; }
