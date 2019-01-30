@@ -1,0 +1,126 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll   int
+#define mod 1000000007
+#define inf  INT_MAX
+#define eps  0.0000000000001
+using namespace std ;  
+
+ll n ;  
+ll arr[101] ; 
+ll primes[60] ; 
+ll DP[101][1<<17] ; 
+pair<ll,ll> path[101][1<<17] ; 
+vector<ll>prime{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53 ,59};
+unordered_map<ll,ll>num ; 
+
+
+
+void doo()
+{
+
+  ll no = 0 ; 
+  for(ll  i  =  0  ; i < (ll)prime.size() ; ++i)
+     num[prime[i]] =no++ ; 
+
+
+  for(ll i  = 2 ;  i < 59  ;  ++i)
+  {
+       ll ans  = 0  ; 
+       ll po  =  i ; 
+     for( ll  j  =   2  ;  j <= sqrt(po) ; ++j)
+     {
+        while(po % j == 0)
+          { 
+            ans  = ans | ( 1 << num[j] )  ;   
+            po = po/j ; 
+          }
+     }
+     if(po > 1)
+      ans  = ans | (1 << num[po] )  ;   
+    primes[i]  = ans ; 
+      
+  }
+  
+  
+}
+
+ll rec(ll cur , ll mask )
+{
+  
+    if(cur == n ) 
+      return 0  ; 
+    if(DP[cur][mask] != -1)
+    return DP[cur][mask] ;  
+    ll maxi = inf ;  
+ 
+  for(ll  i  = 1  ;  i < 60 ;  ++i)
+  {
+
+     if( ( primes[i] & mask ) ==  0 )
+     {
+        int nana  = mask ; 
+        nana = (nana|primes[i]) ;  
+        ll val  = rec(cur + 1 , nana )  + abs(arr[cur] -  i) ;
+       if(val < maxi )
+        {  
+          maxi  =val ;
+          path[cur][mask] = {i ,nana} ; 
+        }  
+     }
+
+  }
+ return DP[cur][mask] =  maxi ;  
+}
+
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+
+   doo();
+    
+  cin>>n ; 
+  for(ll i  = 0 ;  i < n  ; ++i)cin>>arr[i] ; 
+    for(ll i  =  0  ; i < 101 ; ++i)
+    {
+       for(ll j  =  0 ; j  < (1 << 17) ; ++j)
+        DP[i][j]  = -1; 
+    }
+      
+    rec(0  , 0  ) ;  
+    ll maxi  =  inf ;
+    ll ind ;  
+    for(ll i   =  0  ;  i < ( 1 << 17) ; ++i)
+     {
+            if( DP[0][i] <  maxi && DP[0][i] != -1 )
+            {
+             
+               maxi  = DP[0][i]  ;
+               ind =  i ; 
+            }
+     } 
+     
+     ll p = 0 ;  
+     vector<ll>fans ;  
+     while(p <  n )
+     {
+       fans.push_back(path[p][ind].first) ; 
+       ll qq =  path[p][ind].second ;  
+       ind  = qq ; 
+       p++ ;  
+     }
+     
+     for(ll i : fans)
+      cout<<i<<" ";
+
+return   0 ; }
