@@ -1,0 +1,68 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll  long long int
+#define mod 1000000007
+#define inf  20000000000
+#define eps  0.0000000000001
+using namespace std ;  
+ll prefix[100001] ; 
+ ll arr[100001]  ;
+
+ll bin(ll k ,ll indx)
+{
+   ll lo = 0  ,  hi  =  indx  - 1 ; 
+
+   while(lo < hi)
+   {
+     ll mid =  (lo + hi)/2 ; 
+     ll numb = indx  -  mid - 1 ;
+
+     ll req = arr[indx] ; 
+    
+     if( ( prefix[indx-1] - prefix[mid] ) + k >= (req * numb)  )
+      hi = mid  ; 
+     else
+      lo  = mid + 1 ; 
+   }
+   return lo ;  
+}
+
+
+int main()
+{
+ 
+ ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0) ; 
+ ll n , k  ;cin>>n>>k ;  
+
+ for(ll i  = 1 ;  i<=  n ; ++i)cin>>arr[i] ; 
+  sort(arr + 1  ,arr + n + 1)   ; 
+ prefix[0]  = 0 ;   
+ for(ll  i  = 1  ;  i <= n ; ++i  )
+ {
+   prefix[i]  =   prefix[i-1] + arr[i] ;  
+ }
+ll ans  = 0 ; 
+ll fans ;  
+ for(ll i  =  1 ;  i <= n  ; ++i)
+ {
+   ll v  =  bin(k ,  i) ;  
+   ll loc =  i  -v  ;  
+  
+   if(loc > ans)
+   {
+    
+   fans = arr[i]  ;  
+   ans  =  loc ; 
+   }
+ }
+ cout<<ans<<" "<<fans ;  
+ return   0 ;  
+ }
