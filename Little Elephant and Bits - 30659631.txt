@@ -1,0 +1,41 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int 
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie()  
+#define MOD  1000000007  
+
+int main()
+{ 
+  
+   string s  ;
+   cin>>s ;  
+  int del  = s.length()  - 1;  
+   for(int i =   0  ;   i < s.length()    ; ++i)
+   {
+      if(s[i]  == '0')
+         {
+           del  =   i  ;  
+           break ; 
+         }
+   }
+  
+   
+      s.erase(s.begin() + del )   ;
+      cout<<s ; 
+      return    0  ;
+   
+
+
+}
+  
