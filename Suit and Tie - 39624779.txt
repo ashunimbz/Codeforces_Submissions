@@ -1,0 +1,72 @@
+
+/*
+Don't say a word, just come over and lie here with me
+'Cause I'm just about to set fire to everything I see
+I want you so bad I'll go back on the things I believe
+There I just said it, I'm scared you'll forget about me
+*/
+
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll   long long int 
+#define MOD 1000000007
+#define inf  200000000000000
+#define eps  0.0000000000001
+using namespace std ;  
+ll n  ; 
+ll arr[205] ;  
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+  cin>>n  ;
+  
+  for(ll i  = 0 ; i < 2 * n ; ++i)
+    cin>>arr[i] ;  
+
+ ll ways = 0  ;
+
+  for(ll i  = 0 ;  i < (2*n - 1); ++i)
+  {
+     if(i % 2 == 0){  
+      ll to ;
+     if(arr[i] != arr[i+1])
+     {
+     
+        for(ll  j  = i  + 1 ;  j < 2 * n  ;++j)
+        {
+           if(arr[j] == arr[i])
+           {
+             to  =  j  ; 
+             break ; 
+           } 
+        }
+        for(ll p  = to ; p > i + 1 ; --p)
+        {
+           ways++ ;  
+            swap(arr[p]  ,arr[p-1]) ; 
+        }
+     }
+
+    
+     
+    }
+
+  }
+
+  cout<<ways;
+
+
+ return   0  ;
+ }
+
