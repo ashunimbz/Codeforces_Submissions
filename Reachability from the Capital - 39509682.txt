@@ -1,0 +1,78 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll   long long int 
+#define mod 1000000007
+#define inf  200000000000000
+#define eps  0.0000000000001
+using namespace std ;  
+ll n  , m ,s ; 
+bool visited[5005] ; 
+vector<ll> adj[5005] ; 
+vector<ll>nodes ; 
+
+void dfs(ll cur)
+{
+   visited[cur]   = true ;  
+   for(ll p  : adj[cur])
+   {
+      if(!visited[p])
+       dfs(p)  ; 
+   }
+   nodes.push_back(cur) ; 
+
+}
+
+void dfs2(ll cur)
+{
+   visited[cur]   = true ;  
+   for(ll p  : adj[cur])
+   {
+      if(!visited[p])
+       dfs2(p)  ; 
+   }
+
+}
+
+
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+  cin>>n>>m>>s ; 
+   for(ll i  = 0 ; i < m ; ++i)
+   {
+     ll  u , v ;cin>>u>>v ; 
+     adj[u].push_back(v) ;  
+   }
+   for(int i    = 1 ; i <=  n ;++i)
+       {
+           if(!visited[i])
+            dfs(i) ; 
+       }
+  
+  reverse(nodes.begin()   ,nodes.end()) ;  
+  fill(visited  ,visited + n + 1  ,false) ;  
+  dfs2(s) ; 
+  ll ans  = 0 ; 
+
+ for(int i   = 0 ;   i < nodes.size()  ;++i)
+ { 
+
+    if(!visited[nodes[i]] ) 
+    {
+       ans++  ; 
+       dfs2(nodes[i]) ; 
+    }
+ }
+cout<<ans;
+return   0 ; }
+
