@@ -1,0 +1,15 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std ;
+int main()
+{
+    ll a ,b,c ;
+    cin>>a>>b>>c ;
+    ll ans= min(a , b/2 );
+    ll fans = min(ans , c /4);
+    ll ffans = fans + fans*2 + fans *4 ;
+    cout<<ffans ;
+
+
+
+return 0 ;}
