@@ -1,0 +1,141 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#include <cstdio>
+#define ll   long long int
+#define MOD 1000000007
+#define inf  20000000000000
+#define eps  0.0000000000001
+using namespace std ;
+vector<ll>v1 , v2  ; 
+
+ll l , r ; 
+
+ll DP1[19][4][2] ; 
+
+
+ll DP2[19][4][2] ;
+void doit()
+{
+  ll l1 =  r , l2 =  l ;  
+     while(l1)
+     {
+       ll rem  = l1 %10 ;  
+       l1 /= 10 ; 
+       v1.push_back(rem) ; 
+     }
+
+     while(l2)
+     {
+       ll rem  = l2 %10 ;  
+       l2 /= 10 ; 
+       v2.push_back(rem) ; 
+     }
+
+     reverse(v1.begin() , v1.end() )  ;  
+     reverse(v2.begin()  , v2.end()) ; 
+
+}
+
+
+
+ll rec(ll digits , ll taken , ll tight )
+{
+  if(taken > 3)return  0  ;  
+
+  if(digits ==  (ll)v1.size())
+    return 1 ;
+
+
+   if( DP1[digits][taken][tight] != -1)
+    return DP1[digits][taken][tight] ; 
+ 
+ ll   nw = 0 ; 
+   
+   ll upto  = v1[digits] ;
+   if(!tight)
+    upto =  9 ;   
+  ll ans = 0 ;  
+  for(ll  j  = nw ;  j <= upto ; ++j)
+  {
+      int newtight  = (tight &  (j == upto ) ) ;
+      if(j != 0 )   
+      ans += rec(digits + 1  ,taken + 1 ,  newtight ) ;  
+      else
+      ans += rec(digits + 1  ,taken  ,  newtight ) ;  
+  }
+  return  DP1[digits][taken][tight] = ans ;  
+
+}
+
+
+ll rec2(ll digits , ll taken , ll tight )
+{
+  if(taken > 3)return  0  ;  
+
+  if(digits ==  (ll)v2.size())
+
+    return 1 ;
+
+
+   if( DP2[digits][taken][tight] != -1)
+    return DP2[digits][taken][tight] ; 
+ll nw ; 
+ 
+    nw = 0 ; 
+   
+   ll upto  = v2[digits] ;
+   if(!tight)
+    upto =  9 ;   
+  ll ans = 0 ;  
+  for(ll  j  = nw ;  j <= upto ; ++j)
+  {
+      int newtight  = (tight &  (j == upto ) ) ;
+      if(j != 0 )   
+      ans += rec2(digits + 1  ,taken + 1 ,  newtight ) ;  
+      else
+      ans += rec2(digits + 1  ,taken  ,  newtight ) ;  
+  }
+  return  DP2[digits][taken][tight] = ans ;  
+
+}
+
+
+
+
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;
+  ll t ; 
+  cin>>t ;  
+
+  while(t--)
+  {
+  
+    cin>>l>>r ; 
+    v1.clear() ;  v2.clear() ;  
+     for(ll i =  0 ;  i < 19 ; ++i)
+      for(ll  j  = 0  ; j < 4 ; ++j)
+        for(ll k  = 0  ; k < 2  ;++k)
+          { 
+            DP1[i][j][k]  =  -1  ;
+            DP2[i][j][k]  =  -1  ; 
+            }   
+    l--; 
+    doit() ;  
+    cout<<rec(0,0,1)  - rec2(0,0,1)<<"\n";
+
+  }
+   return  0  ;
+  
+} 
+
