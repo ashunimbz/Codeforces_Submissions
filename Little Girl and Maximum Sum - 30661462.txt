@@ -1,0 +1,71 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <utility>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int 
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie()  
+#define MOD  1000000007  
+
+int main()
+{ 
+ ll n  ,q ; 
+ cin>>n>>q ; 
+ ll arr[n] ; 
+ for(ll i  = 0  ;  i  < n   ; ++i)
+  cin>>arr[i] ;  
+
+ll tab[n] ;
+fill(tab  , tab + n   , 0  )  ;  
+ while(q)
+ {
+
+   ll  a  , b ; 
+   cin>>a>>b ; 
+   tab[a-1]++ ; 
+   if(b < n)
+    tab[b]-- ; 
+
+
+ q-- ; }
+ pair<ll,ll> this1[n]  ;
+ ll var  = 0 ;   
+ for(ll i =  0 ; i <    n ; ++i)
+ {
+   var += tab[i] ;  
+   ll yo = var ;  
+   pair<ll ,ll> p =  make_pair( yo, i ) ; 
+   this1[i]  = p;  
+ }
+ sort(this1  ,this1 + n   , [](pair<ll, ll>a1  , pair<ll , ll>b1){
+     return  a1.first > b1.first  ; 
+  
+ });
+ sort(arr , arr +  n  , [](ll a1 , ll b1)
+ {
+    return a1 > b1 ; 
+ }) ; 
+ll ans[n]  ; 
+ for(ll i  = 0 ; i <  n  ;   ++i)
+ {
+   ans[this1[i].second] =  arr[i]   ; 
+ }
+ ll fans = 0 ; 
+   for(int  i  = 0  ; i < n ; ++i)
+   {
+     fans += ans[this1[i].second] * this1[i].first  ;  
+
+   }
+cout<<fans ; 
+
+}
+  
