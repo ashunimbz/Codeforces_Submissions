@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <set>
+#include <map>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#define ll long long
+using namespace std;
+
+
+int main()
+{
+   int n ;
+   cin>>n;
+   int arr[n];
+   bool rated = false ;
+   bool trick = false;
+   int prev = -1;
+
+   int a,b ;
+   for(int i  = 0 ; i< n ; ++i)
+    {
+        cin>>a>>b;
+        if(a != b)
+            rated =true ;
+
+        if(prev == a)
+            trick = true ;
+        arr[i] = a ;
+        prev = a ;
+    }
+    bool flag2 = false ;
+    for(int i = 1 ; i < n ; ++i)
+     {
+
+         if(arr[i] > arr[i-1])
+            {
+                flag2 = true ;
+                break;
+            }
+
+     }
+
+     if( rated)
+        cout<<"rated\n";
+     else if(flag2== true && !rated)
+        cout<<"unrated\n";
+    else if(flag2 == false && !rated) cout<<"maybe\n";
+    return 0;
+}
