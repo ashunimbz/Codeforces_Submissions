@@ -1,0 +1,157 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <map>
+#include <set>
+#include <cmath>
+#include <iomanip>
+#include <climits>
+#include <stack>
+#define ll long long int
+#define MOD 100000000;
+using namespace std ;
+
+
+
+int main()
+{
+   char a , b  ;
+   cin>>a>>b ;
+   ll n ; cin>>n ;
+
+
+       int k  = n % 4  ;
+
+
+       char cw ;
+       char aw ;
+       if(a == char(118))
+       {
+          if(k == 0)
+           {
+             cw = char(118) ;
+             aw = char(118) ;
+           }
+           else if(k ==1)
+           {
+              cw =  char(60) ;
+              aw = char(62) ;
+           }
+           else if(k == 2)
+           {
+             cw =  char(94) ;
+             aw = char(94) ;
+           }
+           else
+           {
+              cw = char(62) ;
+              aw = char(60) ;
+
+           }
+
+
+       }
+
+       if(a == char(60))
+       {
+          if(k == 0)
+           {
+             cw = char(60) ;
+             aw = char(60) ;
+           }
+           else if(k ==1)
+           {
+              cw =  char(94) ;
+              aw = char(118) ;
+           }
+           else if(k == 2)
+           {
+             cw =  char(62) ;
+             aw = char(62) ;
+           }
+           else
+           {
+              cw = char(118) ;
+              aw = char(94) ;
+
+           }
+
+
+       }
+
+
+       if(a == char(94))
+       {
+          if(k == 0)
+           {
+             cw = char(118) ;
+             aw = char(118) ;
+           }
+           else if(k ==1)
+           {
+              cw =  char(62) ;
+              aw = char(60) ;
+           }
+           else if(k == 2)
+           {
+             cw =  char(94) ;
+             aw = char(94) ;
+           }
+           else
+           {
+              cw = char(60) ;
+              aw = char(62) ;
+
+           }
+
+
+       }
+
+
+
+       if(a == char(62))
+       {
+          if(k == 0)
+           {
+             cw = char(118) ;
+             aw = char(118) ;
+           }
+           else if(k ==1)
+           {
+              cw =  char(118) ;
+              aw = char(94) ;
+           }
+           else if(k == 2)
+           {
+             cw =  char(94) ;
+             aw = char(94) ;
+           }
+           else
+           {
+              cw = char(94) ;
+              aw = char(118) ;
+
+           }
+
+
+       }
+
+       if(cw == aw)
+       cout<<"undefined\n" ;
+       else
+       {
+          if(b == cw)
+          cout<<"cw\n" ;
+          else
+          cout<<"ccw\n" ;
+
+       }
+
+
+
+
+return  0 ;
+}
