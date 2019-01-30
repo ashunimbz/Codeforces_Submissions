@@ -1,0 +1,94 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#include <cstdio>
+#define ll   long long int
+#define MOD 1000000007
+#define inf  20000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+ll n ;   
+ll seq[200006] ;  
+set<ll>adj[200006] ;   
+  
+
+void bfs()
+{
+   bool ans =  true ; 
+   queue<int>q ;  
+   q.push(1) ; 
+   ll cur = 1 ;  
+   ll done =  0 ; 
+   while(!q.empty())
+   {   
+      
+      int nw  = q.front() ;     
+      if(nw != 1){
+      if((ll)adj[nw].size()  - 1 == done)
+        { 
+          q.pop() ; 
+          done = 0  ;
+          continue ; 
+        } 
+      }
+      else
+      {
+        if( (ll)adj[nw].size()  == done)
+        { 
+          q.pop() ; 
+          done = 0  ;
+           continue ; 
+        } 
+      }
+     if(adj[nw].find(seq[cur]) == adj[nw].end())
+     {
+
+       ans = false ;  
+       break ; 
+     }
+     else
+     {
+      q.push(seq[cur]) ;   
+      done++;
+     }
+      cur++ ; 
+   }
+
+   if(ans)
+    cout<<"Yes\n" ;  
+  else
+    cout<<"No\n" ;  
+}
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+  cin>>n ;  
+  for(ll i  =  0 ;  i < n -  1 ; ++i)
+  {
+      ll  u , v ; cin>>u>>v ;  
+      adj[u].insert(v) ; 
+      adj[v].insert(u) ;    
+  }
+
+
+  for(ll i  = 0 ;  i < n  ; ++i)
+    cin>>seq[i] ;  
+    if(seq[0] != 1 )
+    {
+      cout<<"No\n"   ;
+      return 0 ;  
+    }
+  bfs() ; 
+
+ return  0  ;
+} 
+
