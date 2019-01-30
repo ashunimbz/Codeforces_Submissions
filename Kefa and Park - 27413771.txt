@@ -1,0 +1,56 @@
+#include <iostream>
+#include <set>
+#include <map>
+#include <algorithm>
+#include <string>
+#include <numeric>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#define ll long long
+using namespace std;
+
+
+int dfs(vector<int>arr[] ,int start ,int cats,bool* iscat,int maxi,int x)
+{
+     if(iscat[start] )
+      {
+        cats++;
+      }
+          else
+        cats = 0 ;
+    if(cats > maxi )
+        return 0  ;
+    if(arr[start].size() == 1 && start != 1 )
+     return 1 ;
+    int ans = 0 ;
+    for(int i = 0 ; i < arr[start].size() ; ++i)
+    {
+       if(arr[start][i] != x)
+       ans +=   dfs(arr,arr[start][i],cats,iscat,maxi,start) ;
+    }
+
+    return ans ;
+}
+
+
+int main()
+{
+    int n ,m ;
+    cin>>n>>m ;
+    bool iscat[n+1] ;
+    for(int i = 1 ; i  <=n ; ++i)
+        cin>>iscat[i] ;
+
+     vector<int>v[n+1] ;
+     int x,y ;
+     for(int i = 0 ; i  < n-1 ; ++i)
+      {
+       cin>>x>>y ;
+       v[x].push_back(y) ;
+       v[y].push_back(x) ;
+      }
+
+      cout<<dfs(v,1,0,iscat,m,-1) ;
+    return 0;
+}
