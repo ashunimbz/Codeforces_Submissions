@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#include <cstdio>
+#define ll   long long int
+#define MOD 1000000007
+#define inf  20000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+   ll n  ; cin>>n ; 
+   ll c = 0  ;
+   ll p  = 1 ;    
+   while(p <= n )
+   {
+      p *= 2 ;  
+      c++ ;  
+   }
+   cout<<c ; 
+ return  0  ;
+} 
+
