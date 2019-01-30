@@ -1,0 +1,77 @@
+/*
+Don't say a word, just come over and lie here with me
+'Cause I'm just about to set fire to everything I see
+I want you so bad I'll go back on the things I believe
+There I just said it, I'm scared you'll forget about me
+*/
+
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <unordered_map>
+#include <algorithm>
+#include <unordered_set>
+#include <iomanip>
+#include <climits>
+#define ll   long long int 
+#define MOD 1000000007
+#define inf  (ll)1e17
+#define eps  0.0000000000001
+#define INF 200
+using namespace std ;
+ll n  ; 
+ll arr[11]  ; 
+ll sum  = 0  ; 
+vector<ll>ans ; 
+void rec(ll cur , vector<ll>v , ll sum1)
+{
+   if(cur == n)
+   {
+     if(sum % 2 ==  0)
+     { 
+      if(sum1 != sum/2 && sum != sum1 && ans.size() == 0)
+         { 
+           for(ll j : v)
+            ans.push_back(j) ; 
+         }
+    }
+    else if(sum != sum1 && ans.size() == 0)
+    {
+       for(ll j : v)
+            ans.push_back(j) ;   
+    } 
+    return  ; 
+   }
+   vector<ll>tp(v)  ;
+   tp.push_back(cur) ;  
+   rec(cur+1 , tp , sum1 + arr[cur] ) ;  
+   rec(cur + 1 ,  v , sum1) ; 
+}
+
+
+int main()
+{
+
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;
+  cin>>n ; 
+  for(ll  i =  0 ; i < n  ;++i)
+    { 
+      cin>>arr[i] ;
+      sum += arr[i] ; 
+    }  
+    vector<ll>nw ; 
+    rec(0  ,nw , 0) ;  
+    if(ans.size() == 0)
+      cout<<-1 ; 
+    else
+    {
+      cout<<ans.size()<<'\n';
+      for(ll v : ans)
+        cout<<v + 1<<" ";
+    }
+  
+return   0 ; }
