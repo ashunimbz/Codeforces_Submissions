@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <map>
+#include <set>
+#include <cmath>
+#include <iomanip>
+#include <climits>
+#include <stack>
+#define ll long long int
+#define MOD 1000000007
+using namespace std ;
+
+int main()
+{
+
+ll s  ,v1,v2,t1,t2 ;
+cin>>s>>v1>>v2>>t1>>t2 ;
+
+if( (2 *  t1 + s* v1)  == 2 * t2 + s *v2)
+cout<<"Friendship" ;
+else if( 2 *  t1 + s * v1  < 2 * t2 + s*v2)
+cout<<"First" ;
+else
+cout<<"Second" ;
+return  0 ;
+}
