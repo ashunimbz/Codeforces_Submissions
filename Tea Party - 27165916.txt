@@ -1,0 +1,64 @@
+#include <iostream>
+#include <algorithm>
+#include <limits>
+#include <vector>
+#include <queue>
+#include <set>
+#define ll long long
+using namespace std;
+int main()
+{
+    int n,w ;
+    cin>>n>>w;
+    int arr[n];
+    for(int i = 0 ; i < n ; ++i)cin>>arr[i];
+
+    vector<int>placed ;
+    for(int i = 0 ; i < n ; ++i)
+    {
+        int currentplaced = (arr[i] + 1)/2 ;
+        for(int j = 0 ; j < i ; ++j)
+        {
+            if(arr[i] > arr[j] && currentplaced < placed[j])
+             {
+                 currentplaced = placed[j];
+             }
+
+        }
+        placed.push_back(currentplaced);
+        w -= currentplaced ;
+    }
+
+    for(int k = 0; k < n ; ++k)
+
+    int maxi = 0 ;
+
+    int maxiindex ;
+    vector<int>q;
+    if(w < 0)
+        cout<<-1<<"\n";
+
+
+    else
+    {
+      multiset<pair<int,int>>s;
+      for(int i = 0 ; i < n ; ++i)
+        s.insert(make_pair(arr[i],i));
+    int z ;
+    for(auto i= s.rbegin() ; i != s.rend() ; ++i )
+    {
+
+        int z =(*i).second ;
+        int k = placed[z];
+        placed[z] += min( (arr[z] - k) , w );
+           w       -= min(arr[z] - k,w) ;
+        if(w==0)
+            break;
+    }
+
+    for(int k = 0; k < n ; ++k)
+       cout<<placed[k]<<" ";
+    cout<<"\n";
+    }
+    return 0;
+}
