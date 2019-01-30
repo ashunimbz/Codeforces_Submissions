@@ -1,0 +1,94 @@
+
+/*
+Don't say a word, just come over and lie here with me
+'Cause I'm just about to set fire to everything I see
+I want you so bad I'll go back on the things I believe
+There I just said it, I'm scared you'll forget about me
+*/
+
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll   long long int 
+#define MOD 1000000007
+#define inf  200000000000000
+#define eps  0.0000000000001
+using namespace std ;  
+pair<ll ,ll> arr[1000005] ; 
+ll n  ; 
+ll fenwick1[1000005] ; 
+ll fenwick2[1000005] ; 
+
+void build1(ll cur)
+{
+   for(ll j = cur ;  j <= n  ; j += j & (-j))
+   {
+     fenwick1[j] += 1 ; 
+   }
+}
+
+ll query1(ll cur)
+{
+   ll ans = 0 ;  
+   for(ll  i  = cur ;  i > 0    ; i  -=  (i & -i) )  
+    ans += fenwick1[i] ;  
+  return ans ;  
+}
+
+void build2(ll cur ,ll val)
+{
+   for(ll j  = cur ;  j <= n ; j += j & (-j))
+    fenwick2[j] += val  ;
+}
+
+ll query2(ll cur)
+{
+    ll ans =  0 ; 
+    for(ll  i  = cur  ;  i >  0 ;   i -= (i &  -i))
+    {
+       ans += fenwick2[i]  ; 
+    }
+    return ans ; 
+}
+
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+   cin>>n ;  
+   for(ll  i =1 ;  i<= n  ;++i)
+  {
+      ll v ; cin>>v ; 
+      arr[i-1]  = {v , i} ; 
+  } 
+  sort(arr , arr + n ,[](pair<ll ,ll>a , pair<ll  ,ll>b){return a.first > b.first ; } )  ;
+   ll ans =0 ;  
+  for(ll  j  =  0  ; j < n ; ++j)
+  {
+     ll index = arr[j].second ; 
+     //cout<<" index == "<<index<<"\n" ;  
+      ll val = query1(index - 1);  
+      //cout<<" simple pair for this = "<<val<<"\n" ;
+      build1(index ) ; 
+      ans += query2(index  -1) ;
+      //cout<<" triple for this index = "<<query2(index  -1)<<'\n';
+      build2(index , val) ; 
+      //cout<<"\n\n\n";
+  } 
+ 
+  
+  cout<<ans;
+ return   0  ;
+ }
+
+
+
