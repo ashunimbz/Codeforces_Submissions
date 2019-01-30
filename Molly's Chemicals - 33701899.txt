@@ -1,0 +1,77 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <utility>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int 
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie()  
+#define MOD  1000000007 
+#define maxsize 100005  
+#define INF 10000000000000
+
+
+int main()
+{
+  IOS;
+  ll n ,  k ;
+  cin>>n>>k ; 
+  ll arr[n] ;
+  for(ll i   = 0  ;  i< n ; ++i)
+  cin>>arr[i] ;   
+ 
+
+  ll subset[n] ;  
+  subset[0]= arr[0] ; 
+  vector<ll>val ; 
+  if(k != -1 && k != 1){
+  ll koda= 1  ;
+  val.push_back(koda) ; 
+  while(koda <= (ll)1e14 && koda >= (ll)-1e14 )
+  { 
+     koda *=   k ;
+     val.push_back(koda)  ;
+  }
+}
+  for(ll i  = 1 ; i < n  ;++i)
+  {
+        subset[i]   =arr[i] + subset[i-1]  ; 
+  }
+ map<ll,ll>mp ;
+  mp.insert({0,1}) ;
+  ll ans = 0  ; 
+  for(ll i  =  0 ; i < n  ;++i)
+  {
+  	    mp[subset[i]]++ ; 
+  	  if(k == 1)
+  	  {
+  	  	   ll diff = subset[i]   - 1  ;
+           ans +=  mp[diff] ; 
+  	  }
+  	  else if( k == -1)
+  	  {
+  	     ll diff1 =  subset[i]  + 1 ; 
+  	     ll diff2 =  subset[i]  - 1 ; 
+  	  	 ans += mp[diff1] + mp[diff2]; 
+  	  }
+  	  else{
+       for(int p  =  0 ; p < val.size() ; ++p)
+       {
+       	 ll diff = subset[i]  - val[p] ; 
+       	 ans += mp[diff] ; 
+       }
+    
+   }
+
+  }
+  cout<<ans   ;
+return 0 ; 
+}
