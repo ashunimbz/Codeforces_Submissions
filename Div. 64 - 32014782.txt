@@ -1,0 +1,54 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <utility>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int 
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie()  
+#define MOD  1000000007  
+
+
+int main(){
+
+	 int c = 0  ;
+	 string s ; 
+	 cin>>s ;
+	 bool done  = false;  
+	 bool ans = false ;  
+	 for(int i  =  s.length()-1 ; i >= 0   ; --i)
+	 {
+	 	  if(s[i] == '1' && done)
+	 	  {
+	 	  	 ans = true ; 
+	 	  	 break ;  
+	 	  }
+	 	if(s[i] == '0')
+	 		c++ ; 
+
+	 	if(c >= 6)
+	 	{
+	 		 done  = true ; 
+
+	 	}
+
+	 }
+
+	 if(ans)
+	 	cout<<"yes" ; 
+	 else
+	 	cout<<"no" ; 
+
+
+
+	
+return   0 ;
+}
