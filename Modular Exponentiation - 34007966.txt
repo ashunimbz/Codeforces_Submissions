@@ -1,0 +1,36 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <utility>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int 
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie()  
+#define MOD  1000000007 
+#define maxsize 100005 
+#define inf (ll)1e16
+
+ 
+int main()
+{
+	IOS; 
+	ll n ,  m  ;
+	cin>>n>>m ; 
+	 if(n > 32)
+	 {
+	 	 cout<<m ; 
+	 }
+	 else
+	 	cout<< m % ( (ll)pow(2 , n) ) ; 
+
+
+return 0 ; 
+}   
