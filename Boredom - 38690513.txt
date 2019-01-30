@@ -1,0 +1,57 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int 
+#define mod 1000000007
+#define inf  100000000000000
+using namespace std ;  
+ll arr[100005] ; 
+ll n ;
+ll maxim  = -1 ;   
+ll DP[100005][2] ;  
+ll rec(ll cur , ll lasttaken)
+{
+      if(cur == maxim + 1  )
+        return 0  ;  
+
+    if(DP[cur][lasttaken] != -1)
+        return DP[cur][lasttaken] ; 
+   ll a  = -inf ,  b  =-inf ; 
+     if(lasttaken)
+    a  = rec(cur + 1 ,  0) ;  
+    else{
+    a =  rec(cur + 1 ,  0 ) ;  
+    b =  rec(cur + 1  , 1) + arr[cur]*cur ; 
+    }
+    return DP[cur][lasttaken] = max(a , b)  ; 
+} 
+
+
+int main()
+{
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+  
+  cin>>n ;
+     
+    fill(arr , arr + 100005 , 0) ;
+  for(int i  = 0 ;  i< 100005 ;  ++i)
+  {
+      for(int j  = 0  ; j < 2 ; ++j)
+        DP[i][j]  = -1 ; 
+  }
+  for(int i  = 0  ; i < n  ;++i)
+  {
+     ll a  ; cin>>a ;
+     maxim = max(maxim   ,a)   ;   
+     arr[a]++ ;  
+  }
+  cout<<rec(0 , 0 );
+  
+  return  0 ;  }
