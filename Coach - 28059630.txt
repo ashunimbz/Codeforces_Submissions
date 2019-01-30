@@ -1,0 +1,105 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <map>
+#include <set>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <numeric>
+#include <string>
+#include <set>
+#include <cmath>
+#define ll  long long int
+using namespace std;
+vector<int> arr[50] ;
+bool visited[50] ;
+bool ans = true ;
+string d = "" ;
+int len = 0 ;
+void dfs(int i )
+{
+    len++ ;
+    visited[i] = true ;
+    d += to_string(i)+ " " ;
+
+    for(int j  = 0 ; j < arr[i].size() ; ++j)
+    {
+        if(!visited[arr[i][j]])
+            dfs(arr[i][j]) ;
+    }
+
+
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);cin.tie(0);
+    int n  , m ;
+    cin>>n>>m ;
+
+    fill(visited , visited  +50 ,false) ;
+
+    for(int i =  0 ; i < m ;++i)
+  {
+    int a , b ;
+    cin>>a>>b ;
+    arr[a].push_back(b) ;
+    arr[b].push_back(a) ;
+
+
+    }
+   vector<string> wow[4] ;
+    for(int i = 1 ;  i <= n ; ++i)
+    {
+        if(!visited[i])
+        {
+            len =   0 ;
+            d = "" ;
+            dfs(i ) ;
+            if(len > 3)
+            {
+                cout<<-1 ;
+                return  0  ;
+
+            }
+            wow[len].push_back(d) ;
+
+
+        }
+    }
+
+   if( (wow[1].size() - wow[2].size()) % 3 != 0 )
+   {
+       cout<<-1 ;
+       return 0 ;
+   }
+
+   int r = 0 ;
+   int s = 0 ;
+
+  for(int k =  0 ; k < wow[3].size() ; ++k)
+    cout<<wow[3][k]<<"\n";
+
+
+   while(r  < wow[2].size())
+   {
+      cout<< wow[2][r] + wow[1][s]<<"\n" ;
+      r++  ;
+      s++ ;
+   }
+
+ while( s < wow[1].size() )
+   {
+       cout<<wow[1][s] ;
+       s++ ;
+       cout<<wow[1][s]   ;
+       s++ ;
+       cout<<wow[1][s] <<"\n" ;
+       s++ ;
+
+   }
+
+
+return 0 ;}
