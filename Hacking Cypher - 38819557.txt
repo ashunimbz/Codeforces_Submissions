@@ -1,0 +1,72 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll  long long int
+#define mod 1000000007
+#define inf  20000000000000000
+#define eps  0.0000000000001
+using namespace std ;  
+
+
+
+int main()
+{
+ 
+ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0); 
+string s ; cin>>s ;
+ll a  ,b ;cin>>a>>b ;  
+
+ll cur = 0  ;  
+unordered_set<ll>pos ;  
+ll rem  = 0 ;  
+bool ans = false ;
+ll sind  ;   
+for(int  i =  0 ; i < s.length()  - 1 ; ++i)
+{
+     rem  =  (rem * 10+ ( s[i] - '0') )%a  ;  
+     if(rem == 0 && s[i + 1] != '0')
+     pos.insert(i) ;  
+}  
+
+ rem  =  0 ; 
+ll l =1  ; 
+for(int j =s.length() -1  ;  j  >  0  ; --j)
+{ 
+   rem   =  ( rem + l* (s[j] - '0') ) % b  ; 
+   l  =(l*10)% b ;
+       if(s[j] == '0')
+      continue;
+    
+  if(rem == 0 && pos.find(j-1) != pos.end())
+  {
+    ans = true ;  
+    sind = j  ; 
+    break; 
+  }  
+    
+
+}
+if(!ans)
+cout<<"NO";
+else
+{
+  cout<<"YES\n" ; 
+   for(int i   = 0 ;  i < s.length() ; ++i)
+   {
+       if(i == sind)
+       {
+         cout<<"\n"<<s[i] ; 
+       }
+       else
+        cout<<s[i] ; 
+   }
+}
+   
+ return   0 ;  }
