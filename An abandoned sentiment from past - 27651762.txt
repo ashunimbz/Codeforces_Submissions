@@ -1,0 +1,129 @@
+import java.util.* ;
+import java.io.* ;
+
+
+public class be {
+    static class FastReader
+    {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public FastReader()
+        {
+            br = new BufferedReader(new
+                    InputStreamReader(System.in));
+        }
+
+        String next()
+        {
+            while (st == null || !st.hasMoreElements())
+            {
+                try
+                {
+                    st = new StringTokenizer(br.readLine());
+                }
+                catch (IOException  e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt()
+        {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong()
+        {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble()
+        {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine()
+        {
+            String str = "";
+            try
+            {
+                str = br.readLine();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            return str;
+        }
+    }
+
+
+
+
+
+    public  static  void main(String[] args)
+    {
+        FastReader sc = new FastReader() ;
+        int n = sc.nextInt() ;
+        int k = sc.nextInt() ;
+        int[] arr1 = new int[n] ;
+        int[] arr2 =  new int[k] ;
+        boolean pre = false ;
+        for(int i = 0 ; i < n ; ++i)
+        {
+            arr1[i] = sc.nextInt() ;
+
+
+        }
+
+        for(int i = 0 ; i < k ; ++i)
+        {
+            arr2[i] = sc.nextInt() ;
+        }
+
+            Arrays.sort(arr2);
+
+
+             int j = k-1 ;
+        for(int i =  0 ; i <n ; ++i)
+        {
+
+          if(arr1[i] == 0)
+          {
+              arr1[i] = arr2[j] ;
+              j-- ;
+
+          }
+
+        }
+        boolean fans = false ;
+           for(int x = 1 ; x < n ; ++x)
+           {
+               if(arr1[x] < arr1[x-1])
+                   fans = true ;
+
+           }
+
+           if(fans )
+               System.out.println("Yes");
+           else
+               System.out.println("No");
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+}
