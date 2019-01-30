@@ -1,0 +1,55 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#include<stack>
+#define ll    long long int 
+#define MOD 1000000007
+#define inf  2000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+ll n  ; 
+
+ struct my 
+{
+  ll id  = 0  ; 
+  ll sum  = 0  ; 
+}arr[1005];
+
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;
+   cin>>n ;  
+   for(ll i   = 0 ;  i < n  ;++i)
+   {
+     ll a  ,b ,c ,d ;cin>>a>>b>>c>>d ;  
+     ll sum =  a + b + c + d ;  
+    arr[i].sum  = sum  ;  
+    arr[i].id  = i   ;   
+   }
+
+   sort(arr  , arr + n ,  [](my a  , my b){
+       if(a.sum == b.sum )
+        return a.id < b.id ;   
+      return a.sum > b.sum  ;  
+   });
+   for(ll  i   = 0 ;  i < n  ;++i)
+
+   {
+      if(arr[i].id == 0)
+      {
+         cout<<i+1<<"\n" ;  
+         return  0  ;
+      }
+   }
+
+  return 0  ;
+}
