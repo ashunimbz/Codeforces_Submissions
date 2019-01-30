@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+#define ll long long 
+#define inf (ll)1e15
+#define mod 1000000007
+using namespace std;
+
+
+int main() {
+  ios::sync_with_stdio(false);cin.tie(0);cout.tie(0) ;
+  ll n  ;
+  cin>>n ;  
+  ll arr[2000] ; 
+  fill(arr , arr + 2000  ,false) ;  
+  ll f = 1 ; 
+  ll s = 1 ; 
+  arr[1]  =true ;
+  ll sum = f + s ;  
+  while(sum <= n)
+  {
+  	 arr[sum]  = true  ; 
+  	 f = s ; 
+  	 s =  sum ;  
+  	 sum = f + s ; 
+
+  }
+  for(int i   = 1 ;  i<= n  ;++i)
+  {
+  	 if(arr[i])
+  	 	cout<<"O" ; 
+  	 else
+  	 	cout<<"o" ;
+  }
+
+  
+    return 0;
+}
