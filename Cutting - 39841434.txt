@@ -1,0 +1,97 @@
+
+/*
+Don't say a word, just come over and lie here with me
+'Cause I'm just about to set fire to everything I see
+I want you so bad I'll go back on the things I believe
+There I just said it, I'm scared you'll forget about me
+*/
+
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll    long long int 
+#define MOD 1000000007
+#define inf  2000000000
+#define eps  0.0000000000001
+using namespace std ;  
+ll n  , b ;
+ll arr[105] ; 
+ll even[105] ; 
+ll odd[105] ; 
+ll DP[105][105][105] ; 
+ll maxi(ll cur ,ll  coins ,ll start)
+{
+  if(coins > b )
+    return -inf ; 
+   if(cur == (n + 1) ) 
+   {
+      if( (even[cur-1] - even[start - 1]) != (odd[cur-1]  -  odd[start - 1]) ) 
+        return -inf ; 
+      
+      if(coins <= b)
+        return 0 ;  
+      else
+        return -inf ; 
+   }
+   if(DP[cur][coins][start] != -1 ) 
+    return DP[cur][coins][start]  ;
+   ll a =  -inf , ba = -inf ; 
+   if( ( (even[cur-1] - even[start - 1]) == (odd[cur-1]  -  odd[start - 1]) )  &&  cur != 1  ) 
+    a = maxi(cur + 1 , coins + abs(arr[cur] - arr[cur -1])  ,cur )  + 1;
+
+    ba=  maxi(cur + 1 , coins , start)  ; 
+    return DP[cur][coins][start]  = max(a , ba) ;   
+}
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+  cin>>n>>b ; 
+  for(ll i = 1  ; i <= n ; ++i)cin>>arr[i] ; 
+ 
+ for(ll  i  = 1 ; i <= n + 1 ;++i )
+ {
+    if(arr[i] % 2 != 0 )
+    {
+        odd[i]  =odd[i-1] + 1 ; 
+    }
+    else
+      odd[i]  = odd[i-1] ; 
+ }
+
+
+ for(ll  i  = 1 ; i <= n + 1 ;++i )
+ {
+    if(arr[i] % 2 == 0 )
+    {
+        even[i]  =even[i-1] + 1 ; 
+    }
+    else
+      even[i]  = even[i-1] ; 
+ }
+
+for(ll i  = 0 ;  i < 105 ; ++i)
+  for(ll j  = 0 ;  j <105  ; ++j)
+    for(ll k  = 0 ; k < 105 ; ++k)
+      DP[i][j][k]  =  -1;  
+
+ ll p = maxi(1,0,1) ;
+ if(p <= 0)
+  cout<<0 ; 
+else
+  cout<<p;
+ return   0  ;
+ }
+
+
+
+
