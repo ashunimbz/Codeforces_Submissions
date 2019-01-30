@@ -1,0 +1,90 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#include <cstdio>
+#define ll    long long int
+#define MOD 1000000007
+#define inf  20000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+
+bool yo[101][101] ;  
+
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;
+    ll  n , d ; cin>>n>>d  ;  
+    
+
+    for(ll  x  =  0 ;  x  < n -d ;  ++x)
+    {
+       for(ll y  =  n ;  y  >= 0   ; --y )
+       {
+
+
+           if(y  -x  > d)
+           {
+              yo[x][y] =  true ;  
+           }
+       }
+    }
+
+   for(ll x =   n     ;   x  > n - d  ;  x--)
+   {
+     for(ll y =  n ;   y  >= 0  ; --y)
+     {
+           if(y + x > 2 * n   - d)
+            { 
+              yo[x][y] =  true ;
+            }
+              
+     }
+             
+   } 
+
+   for(ll  x     = 0  ; x  < d ; ++x)
+   {
+     for(ll  y  = 0  ;  y <= n  ; ++y)
+     {
+        if(x +  y   <d)
+        {
+           yo[x][y] =  true ;
+
+        }
+     }
+   }
+
+   for(ll  x  =  n ;   x > d ; --x)
+   {
+     for(ll  y  =  0  ;   y  <= n  ; ++y)
+     {
+        if(x  -  y  > d)
+        {
+           yo[x][y] =  true ;
+
+        }
+     }
+   }
+   ll q ;
+  cin>>q ;  
+  while(q--)
+  {
+     ll x , y  ; cin>>x>>y ;  
+
+     if(yo[x][y])
+      cout<<"NO\n" ; 
+    else
+      cout<<"YES\n" ; 
+  }
+
+return  0 ; 
+} 
