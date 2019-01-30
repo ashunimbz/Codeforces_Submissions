@@ -1,0 +1,59 @@
+#include <iostream>
+#include <algorithm>
+#include <map>
+#include <cmath>
+#include <climits>
+using namespace std;
+#define ll long long int
+
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;
+  ll n  ; cin>>n ;
+
+  map<int ,int> m ;
+  int v ;
+  for(ll i  = 0 ; i < n ; ++i)
+  {
+      cin>>v ;
+      if(m.find(v) == m.end())
+        m.insert(make_pair(v,1)) ;
+
+      else
+        m[v]++ ;
+  }
+
+  int remaining  = 3 ;
+  ll ans  = 0 ;
+  for(auto  i  = m.begin() ; i != m.end() ; ++i)
+  {
+      if((*i).second >= remaining)
+      {
+          ll q = (*i).second ;
+           ll z = 1;
+           ll y = 1 ;
+           while(remaining > 0)
+           {
+               z *= q ;
+               q-- ;
+               y *= remaining ;
+               remaining-- ;
+           }
+
+           ans  = z/y ;
+          break ;
+
+      }
+
+      else
+      {
+          remaining -= (*i).second ;
+       }
+
+  }
+
+  cout<<ans ;
+
+    return 0;
+}
