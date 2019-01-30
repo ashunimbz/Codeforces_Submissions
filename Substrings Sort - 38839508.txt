@@ -1,0 +1,70 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int
+#define mod 1000000007
+#define inf  10000000000
+using namespace std ;  
+
+
+bool issubstring(string s  ,string j)
+{
+   for(int p =  0  ;  p < s.length(); ++p){
+       ll q =  p  ;
+       ll z  = 0 ;  
+       while(s[q] == j[z]  && q < s.length() && z < j.length())
+       {
+         q++;
+         z++ ;
+       }
+      q-- ; 
+      if(q -  p + 1 == j.length())
+        return true ; 
+ }
+ return false ; 
+}
+
+
+int main()
+{
+
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+  ll n  ;
+  cin>>n ;
+  string arr[n] ;    
+  for(int i  = 0  ; i< n ; ++i)
+   cin>>arr[i] ;   
+   sort(arr  ,arr + n  ,[](string a  , string b){return a.length() < b.length() ; })  ; 
+
+   bool ans = true  ; 
+   for(int i   = n-1  ;   i > 0  ; --i)
+   {
+     for(int j    = 0  ;  j <  i ; ++j )
+     {
+         if(!issubstring(arr[i]   ,arr[j]))
+         {
+   //cout<<arr[i]<<" "<<arr[j]<<"\n";
+           ans  =false ; 
+           break ; 
+         }
+     }
+     if(!ans)break ; 
+   }
+   if(!ans)
+    cout<<"NO\n" ;  
+  else
+  {
+     cout<<"YES\n"  ; 
+     for(int  i  =  0  ; i  < n ; ++i)
+      cout<<arr[i]<<"\n";
+    
+  }
+
+  return   0 ;   }
