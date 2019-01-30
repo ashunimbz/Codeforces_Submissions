@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <stack>
+#include <queue>
+#include <set>
+#include <unordered_set>
+#include <unordered_map>
+#include <iomanip>
+#include <climits>
+using namespace std ;
+#define maxsize 100001  
+#define ll long long int
+#define mod 1000000007
+   
+
+
+int main()
+{
+	ios::sync_with_stdio(false) ;cin.tie(0) ; cout.tie(0) ; 
+	 ll n ;
+	 cin>>n ; 
+	 ll arr[n]  ;
+	 ll mina =  (ll)-1e18 ; 
+	 for(ll i  = 0 ; i  < n  ;++i)
+	 {
+	 	 cin>>arr[i]  ;
+	 	 if(arr[i] <  0 )
+	 	 {
+	 	 	 mina  =max(mina , arr[i] ) ; 
+	 	 } 
+	 	 else
+	 	 {
+	 	 	 float f =  (float)sqrt(arr[i]) ;  
+	 	 	 ll yo  = (int)f ; 
+	 	 	 if(f != yo)
+	 	 	 	mina =  max(mina , arr[i]) ; 
+	 	 }
+
+
+	 }
+	 cout<<mina ; 
+     
+return 0 ; 
+}
+
