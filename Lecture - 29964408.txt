@@ -1,0 +1,65 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <set>
+#include <map>
+#include <iomanip>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <queue>
+#define ll long long int
+#define MOD 1000000007
+#define IOS ios::sync_with_stdio(false)  ; cin.tie()  ; cout.tie()
+#define MAX 100001
+using namespace std;
+
+
+ int main(){
+      IOS  ;
+      unordered_map<string , string >um1 ;
+      unordered_map<string   ,string >um2 ;
+
+     int n , m  ;
+     cin>>n>>m ;
+     for(int i  =  0  ; i <  m ; ++i)
+     {
+      string s1  ,s2;
+      cin>>s1>>s2 ;
+      um1.insert({s1,s2})   ;
+      um2.insert({s2,s1})  ;
+
+     }
+     for(int i  = 0 ;  i<  n ; ++i)
+     {
+         string s;
+         cin>>s ;
+         string na ;
+         if(um1.find(s) != um1.end())
+             na = um1[s] ;
+         else
+             na = um2[s] ;
+
+        if(s.length() == na.length())
+        {
+            if(um1.find(s) == um1.end())
+               cout<< um2[s] <<" ";
+            else
+                cout<<s<<" "  ;
+
+
+        }
+        else
+        {
+            if(s.length() < na.length())
+                cout<<s<<" " ;
+            else
+                cout<<na<<" " ;
+
+        }
+
+     }
+       return 0;
+}
