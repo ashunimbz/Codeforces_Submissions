@@ -1,0 +1,56 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <map>
+#include <set>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <numeric>
+#include <string>
+#include <set>
+#include <cmath>
+#include <stack>
+#include <cctype>
+#include <iomanip>
+#define MOD 1000000007
+#define ll  long long int
+using namespace std;
+
+struct info{
+ll wi  ;
+ll hi ;
+};
+
+int main(){
+ios::sync_with_stdio(false);cin.tie(0) ;
+cout.tie() ;
+
+ll n ; cin>>n ;
+struct info arr[n] ;
+multimap<ll , ll >m ;
+ll sum  = 0 ;
+for(int i = 0  ; i < n ; ++i)
+{
+    cin>>arr[i].wi>>arr[i].hi ;
+    sum += arr[i].wi ;
+    m.insert(make_pair(arr[i].hi ,  i)) ;
+}
+
+for(int i  =  0  ; i < n ; ++i)
+{
+    ll wei  =  sum  - arr[i].wi  ;
+    ll hie  ;
+    if( (*m.rbegin()).second == i )
+        hie = (*(++m.rbegin() )).first ;
+    else
+        hie = (*m.rbegin()).first ;
+
+    cout<<wei*hie<<" " ;
+}
+
+
+
+return 0
+;}
