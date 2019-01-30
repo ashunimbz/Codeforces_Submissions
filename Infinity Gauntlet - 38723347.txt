@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int 
+#define mod 1000000007
+#define inf  100000000000000
+using namespace std ;  
+
+
+int main()
+{
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+  map<string ,  string > mp  ;  
+
+  mp.insert({ "purple"  ,"Power" }) ;  
+  mp.insert({ "green" ,"Time"}) ; 
+  mp.insert({ "blue" , "Space" }) ; 
+  mp.insert({"orange" , "Soul" }) ; 
+  mp.insert({ "red" , "Reality" }) ; 
+  mp.insert({"yellow"  , "Mind"  }) ;
+  int  n  ; 
+  cin>>n ; 
+  for(int i  =  0 ;   i < n ; ++i)
+  {
+     string s ; cin>>s ;  
+    mp.erase(s) ; 
+  } 
+  cout<<mp.size()<<'\n' ;
+  for(auto p : mp)
+    cout<<p.second<<"\n";
+
+  return  0 ;  }
