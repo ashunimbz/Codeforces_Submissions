@@ -1,0 +1,80 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <set>
+#include <map>
+#include <iomanip>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <queue>
+#define ll long long int
+#define MOD 1000000007
+#define IOS ios::sync_with_stdio(false)  ; cin.tie()  ; cout.tie()
+#define MAX 100001
+using namespace std;
+
+string start =  "1" ;
+vector<int>v ;
+void gen(string nw)
+{
+
+    if(nw.length() > 7)
+        return  ;
+    v.push_back(stoi(nw));
+    gen(nw + "0") ;
+    gen(nw + "1") ;
+
+
+}
+
+
+
+
+ll table[1000001] ;
+
+ int main(){
+      IOS  ;
+      string nw = start ;
+
+      gen(nw);
+
+    int n  ;
+    cin>>n ;
+
+   sort(v.begin()  ,v.end())  ;
+   vector<int>rad ;
+   fill(table , table +  1000001  , INT_MAX)  ;
+   table[0]  =  0 ;
+
+   vector<int>ans ;
+   vector<int>path(1000001)  ;
+   for(int i  = 1  ; i <= 1000000  ; ++i)
+   {
+
+     for(int   j  =  0 ;  j< v.size()  ; ++j)
+     {
+
+         if(i - v[j] >=  0 && table[i - v[j]] + 1 < table[i])
+         {
+             table[i]  = table[i - v[j]] + 1;
+             path[i] =  i - v[j];  }
+     }
+
+   }
+
+
+
+  cout<<table[n]<<"\n" ;
+   int yo  = n ;
+   while(yo != 0)
+   {
+    cout<<yo  - path[yo]<<" " ;
+    yo  = path[yo]  ;
+   }
+
+
+       return 0;
+}
