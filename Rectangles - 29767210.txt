@@ -1,0 +1,58 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <set>
+#include <map>
+#include <iomanip>
+#include <climits>
+#include <cmath>
+#define ll long long int
+#define MOD 1000000007
+#define IOS ios::sync_with_stdio(false)  ;cin.tie()  ; cout.tie()
+
+using namespace std;
+
+
+int main()
+{
+    IOS;
+    int n  , m ;
+    cin>>n>>m ;
+    int arr[n][m];
+    for(int i  =  0 ;  i<   n  ;++i)
+    {
+      for(int j =  0 ;  j< m ; ++j)
+       cin>>arr[i][j] ;
+    }
+    int c=  0 ;
+   ll ans =  0 ;
+    for(int i =  0 ; i<  n  ; ++i)
+    {
+       c  =  0 ;
+       for(int j  = 0 ;  j < m  ;++j)
+       {
+          if(arr[i][j] ==  0)
+           c++ ;
+       }
+
+       ans += (ll)pow(2,c) -1 + (ll)pow(2 ,m -c ) -1 ;
+
+    }
+
+    for(int i  = 0  ; i < m ; ++i)
+    {
+    int c= 0  ;
+      for(int j  = 0  ;  j <  n  ;++j)
+      {
+         if(arr[j][i] == 0 )
+         c++ ;
+
+      }
+       ans += (ll)pow(2,c) -1 + (ll)pow(2 ,n -c ) -1 ;
+    }
+    cout<<ans  -  m * n  ;
+
+    return 0;
+}
