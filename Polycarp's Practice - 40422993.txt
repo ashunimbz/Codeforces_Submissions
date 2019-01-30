@@ -1,0 +1,78 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll    long long int 
+#define MOD 1000000007
+#define inf  2000000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+
+
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+   ll n , k  ;
+   cin>>n>>k ;
+   ll arr[n] ;  
+   ll temp[n] ;   
+   for(ll i  = 0 ; i < n ; ++i)
+    { 
+      cin>>arr[i] ;
+      temp[i]  =arr[i] ;  
+    }
+
+    sort(temp  , temp + n ,  [](ll i  , ll j){ return   i   > j ;  }) ;
+     
+     multiset<ll>ms ;   
+
+     ll fans= 0 ;  
+
+    for(ll  i  = 0 ;  i <  k ;++i)
+       { 
+        fans += temp[i] ;  
+         ms.insert(temp[i]) ;
+       }
+
+    vector<ll>pos ; 
+
+    for(ll  i = 0  ;  i <  n ; ++i)
+    {
+        if(ms.find(arr[i]) != ms.end())
+        {
+           auto it = ms.find(arr[i]) ;  
+           pos.push_back(i) ; 
+           ms.erase(it) ; 
+        }
+    }
+
+    vector<ll>ans ;
+    ll loc = 0 ;
+    ll p  = 0  ;   
+    for(ll  i  =  0 ; i  < n  ; ++i )
+    {
+           loc++ ;
+          if(pos[p] == i && p < k - 1 )
+          {
+            ans.push_back(loc) ;
+            loc =  0 ; 
+            p++ ; 
+          
+          }
+    }
+    cout<<fans<<"\n";
+    ans.push_back(loc);
+    for(ll q : ans)
+      cout<<q<<" ";
+
+   return   0  ;
+
+}
