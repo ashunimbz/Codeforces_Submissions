@@ -1,0 +1,149 @@
+import java.util.* ;
+import java.io.* ;
+
+
+public class be {
+    static class FastReader
+    {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public FastReader()
+        {
+            br = new BufferedReader(new
+                    InputStreamReader(System.in));
+        }
+
+        String next()
+        {
+            while (st == null || !st.hasMoreElements())
+            {
+                try
+                {
+                    st = new StringTokenizer(br.readLine());
+                }
+                catch (IOException  e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt()
+        {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong()
+        {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble()
+        {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine()
+        {
+            String str = "";
+            try
+            {
+                str = br.readLine();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            return str;
+        }
+    }
+
+    static boolean draw  =false ;
+    static int ans =  0 ;
+    static  int noOfFights =  0;
+   static ArrayList<Integer>arr1 =  new ArrayList<>() ;
+   static ArrayList<Integer>arr2 =  new ArrayList<>() ;
+
+
+static  void recurse(ArrayList<Integer>a1 , ArrayList<Integer>a2 )
+{
+
+
+    if(a1.get(0) > a2.get(0))
+    {
+        int k  = a1.get(0) ;
+        int l  = a2.get(0) ;
+        a1.remove(0) ;
+        a2.remove(0) ;
+        a1.add(l) ;
+        a1.add(k) ;
+        noOfFights++ ;
+    }
+    else
+    {
+        int k  = a1.get(0) ;
+        int l  = a2.get(0) ;
+        a1.remove(0) ;
+        a2.remove(0) ;
+        a2.add(k) ;
+        a2.add(l) ;
+        noOfFights++ ;
+    }
+    if( (a1.equals(arr1) && a2.equals(arr2)) || (noOfFights  >106))
+    {
+        draw = true ;
+        return  ;
+    }
+
+    if(a1.size() == 0)
+    {
+        ans = 2 ;
+        return  ;
+    }
+    if(a2.size() == 0)
+    {
+        ans = 1 ;
+        return ;
+    }
+
+  recurse(a1,a2);
+}
+
+
+
+    public  static  void main(String[] args)
+    {
+        FastReader sc = new FastReader() ;
+         int n  =sc.nextInt() ;
+      int x = sc.nextInt() ;
+
+         for(int i = 0  ; i < x ; ++i)
+         {
+             arr1.add(sc.nextInt());
+         }
+         int y  =sc.nextInt() ;
+        for(int i = 0  ; i <y  ; ++i)
+        {
+            arr2.add(sc.nextInt());
+        }
+
+         ArrayList<Integer>a1 = new ArrayList<>() ;
+         ArrayList<Integer>a2 = new ArrayList<>() ;
+           a1.addAll(arr1) ;
+           a2.addAll(arr2) ;
+           recurse(a1,a2);
+
+           if(draw)
+               System.out.println(-1);
+           else
+           {
+               System.out.println(noOfFights + " " + ans);
+
+
+           }
+
+    }
+
+}
