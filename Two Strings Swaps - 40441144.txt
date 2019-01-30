@@ -1,0 +1,100 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll    long long int 
+#define MOD 1000000007
+#define inf  2000000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;
+   ll n ;  
+  cin>>n; 
+   string a   , b  ;  cin>>a>>b ;  
+   a  = "m" + a ;  
+   b =  "m" + b  ; 
+  
+   map<char  , int>mp ;  
+
+   if(n % 2 == 0 )
+  {
+
+   ll ans = 0 ;  
+   for(ll i  =1 ;  i <= n/2  ; ++i)
+   {
+          char a1 =  a[i] ;  
+          char a2 = a[n-i + 1];  
+          char b1 = b[i] ; 
+          char b2 = b[n-i + 1] ; 
+          mp[a1]++; mp[a2]++ ;  mp[b1]++ ;  mp[b2]++ ; 
+                    auto yo =  mp.begin()++ ; 
+           
+          if(mp.size()==1)
+          {
+             mp.clear() ;  
+             continue ; 
+          }
+          if(mp.size() == 2 && (*mp.begin()).second == 2 &&  (*yo ).second == 2 ) 
+            {
+              mp.clear() ; 
+              continue ; 
+            }
+          if(a1 == b1 || a1 == b2 || a2 == b1 || a2 == b2 || b1 == b2)
+            ans += 1 ; 
+          else
+            ans += 2 ; 
+
+          mp.clear() ; 
+   }
+  cout<<ans;
+  }
+  else
+  {
+
+   ll ans = 0 ;  
+   for(ll i  =1 ;  i <= n/2  ; ++i)
+   {
+          char a1 =  a[i] ;  
+          char a2 = a[n-i + 1];  
+          char b1 = b[i] ; 
+          char b2 = b[n-i + 1] ; 
+          mp[a1]++; mp[a2]++ ;  mp[b1]++ ;  mp[b2]++ ; 
+          auto yo =  mp.begin()++ ; 
+          if(mp.size()==1)
+          {
+             mp.clear() ;  
+             continue ; 
+          }
+
+          if(mp.size() == 2 && (*mp.begin()).second == 2 &&  (*yo ).second == 2 ) 
+            { 
+               mp.clear() ; 
+              continue ; 
+            }
+          if(a1 == b1 || a1 == b2 || a2 == b1 || a2 == b2 || b1 == b2)
+            { 
+              ans += 1 ;
+            } 
+          else
+            ans += 2 ; 
+     
+        mp.clear() ; 
+         
+   }
+   if(a[(n+1)/2] != b[(n+1)/2])
+    ans++ ; 
+  cout<<ans ; 
+  }
+
+   return   0  ;
+}
