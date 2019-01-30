@@ -1,0 +1,80 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int 
+#define mod 1000000007
+#define inf  100000000000
+using namespace std ;  
+
+void equal(int a)
+{
+  for(int i    = 0  ; i < a ; ++i)
+  {
+     cout<<10;  
+  }
+}
+void onethree()
+{
+     cout<<1<<0<<1<<1 ; 
+}
+void onefour()
+{
+     cout<<11011 ; 
+}
+
+int main()
+{
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+  ll n , m  ; 
+  cin>>n>>m ;
+  
+  if(n > m + 1 || m > 2* n + 2 )
+  {
+     cout<<-1 ;  
+     return  0  ;  
+  }
+  if(n == m + 1)
+  {
+     for(int i   =  0 ; i  < n + m   ; ++i)
+     {
+         if(i % 2 == 0)
+            cout<<0  ; 
+        else
+            cout<<1 ;  
+     }
+     return  0  ; 
+  }
+ 
+
+  while(1)
+  {
+    
+     if(n == m)
+     {
+         equal(n)  ; 
+         break ;  
+     }
+     if(n == 1 && m == 3)
+        {
+            onethree()  ;
+            break ; 
+        } 
+        if(n == 1 && m == 4)
+        {
+             onefour() ;  
+             break ; 
+        }
+         cout<<110 ;  
+     m -= 2 ;  
+     n -= 1  ; 
+  }
+  
+
+return  0 ;  }
