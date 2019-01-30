@@ -1,0 +1,96 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <utility>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int 
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie()  
+#define MOD  1000000007 
+#define maxsize 100005  
+#define INF 10000000000000
+
+
+int main()
+{
+
+
+	 IOS; 
+	 multiset< pair<ll ,ll> >ms ; 
+     ll n  , m  ; 
+     cin>>n>>m ;  
+     vector< pair< ll ,ll > >adj[n +1]   ;
+     ll  u , v , w ; 
+     ll distance[n+1] ;
+     bool visited[n+ 1] ;  
+     ll path[n + 1] ; 
+     fill(distance   ,distance + n + 1  ,INF)  ; 
+     fill(visited   ,visited + n + 1  ,false)  ; 
+     fill(path , path + n + 1 ,1) ; 
+     for(ll i = 0  ; i < m; ++i)
+     {
+     	 cin>>u>>v>>w ;
+     	 adj[u].push_back({v,w})  ;
+     	 adj[v].push_back({u,w})  ; 
+     }
+
+     ms.insert({0,1} ) ; 
+     distance[1]  = 0 ;
+     while(!ms.empty())
+     {
+     	 pair< ll ,ll >p = *ms.begin() ; 
+     	 ms.erase(p) ; 
+     	 ll node = p.second ;
+     	 if(visited[node])
+     	 	continue ; 
+     	 for(ll  i  = 0 ; i < (ll)adj[node].size() ; ++i )
+     	 {
+                 pair<ll ,ll>yo  = adj[node][i] ; 
+                 ll node2 = yo.first  ;  
+                 ll weight  = yo.second ; 
+                 if( weight + distance[node] < distance[node2] )
+                 {
+                 	  distance[node2]  = distance[node] + weight   ; 
+                 	  ms.insert({distance[node2] , node2}) ;
+                 	  path[node2] =  node;  
+                 }    
+                  	 
+         }
+         visited[node] = true ;         
+     }
+     if(distance[n] == INF)
+     {
+     	 cout<<-1 ; 
+     	 return  0  ; 
+     }
+  
+    vector<int>ans ; 
+    ans.push_back(n) ; 
+    while(1)
+    {
+    	n = path[n] ; 
+    	ans.push_back(n) ; 
+    	if(n == 1)
+    		{
+    			
+    			break; 
+    		}
+
+    } 
+    for(int  i =  ans.size() - 1 ;  i>= 0 ; --i)
+    {
+    	 cout<<ans[i]<<" "  ;
+    }
+    
+return 0 ; 
+}
+
+
