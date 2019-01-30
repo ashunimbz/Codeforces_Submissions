@@ -1,0 +1,53 @@
+#include <iostream>
+
+using namespace std;
+
+bool  binarysearch(string s ,int c ,int mid)
+{
+    int z = 1 ;
+    int previous  = 0 ;
+    int backup =  0 ;
+    for(int i = 0 ; i < s.length() ; ++i)
+      {
+
+              if( i+1 -previous > mid)
+              {
+                  if(previous == backup)
+                  return false;
+                  if(z < c)
+                  {previous = backup ;
+                  z++;
+                  }
+                  else
+                    return false;
+              }
+              if(s[i] == ' ' || s[i] == '-')
+                backup = i+1 ;
+
+      }
+ return true ;
+}
+
+int main()
+{
+    int c ;
+    cin>>c ;
+    cin.ignore() ;
+    string s ;
+    getline(cin,s);
+    int lo = 1 ;
+    int hi = s.length();
+    while(lo < hi )
+      {
+          int mid = lo + (hi - lo  )/2 ;
+          if(binarysearch(s,c,mid))
+          {
+              hi = mid ;
+          }
+          else
+            lo = mid + 1 ;
+
+      }
+      cout<<lo ;
+    return 0;
+}
