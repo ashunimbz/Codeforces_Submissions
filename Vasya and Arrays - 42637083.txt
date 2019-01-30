@@ -1,0 +1,92 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#include <cstdio>
+#define ll   long long int
+#define MOD 1000000007
+#define inf  20000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+
+ 
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;
+    ll n1 ; 
+    cin>>n1 ;  
+    ll arr1[n1] ;
+    for(ll i = 0  ; i < n1 ; ++i)
+      cin>>arr1[i] ;  
+    ll n2 ; 
+    cin>>n2 ;  
+    ll arr2[n2]  ; 
+    for(ll i  = 0 ; i < n2 ; ++i)
+      cin>>arr2[i] ;   
+
+    ll p1 =   0  ;  
+    ll p2 = 0  ; 
+    ll size = 0  ; 
+    ll s1 = 0 ; 
+    ll s2 = 0  ; 
+    bool ans =true ;  
+    while(1)
+    {
+          if(p1 == n1 && p2 == n2)
+          {
+              if(s1 != s2)
+              {
+                 ans = false ;  
+              }
+              else if(s1 != 0 )
+                size++ ; 
+              break ; 
+          }
+         if(p1 == n1)
+         {
+          s2 += arr2[p2] ;  
+         p2++ ;  
+         continue ; 
+
+         }
+         if(p2 == n2)
+         {
+           s1 += arr1[p1] ;
+          p1++;
+          continue ; 
+         }
+
+
+       if( s1 < s2 || (s1 == 0 && s2 == 0 )  )
+        { 
+          s1 += arr1[p1] ;
+          p1++;
+          continue ;    
+        } 
+      if(s2  < s1)
+      {
+         s2 += arr2[p2] ;  
+         p2++ ;  
+         continue ; 
+      }
+      if(s1 == s2 )
+      {
+         size++ ;  
+         s1 = 0 ;  
+         s2 = 0 ; 
+      }
+    }
+    if(ans)
+    cout<<size  ;
+  else
+    cout<<-1 ; 
+ 
+ return  0  ;
+} 
