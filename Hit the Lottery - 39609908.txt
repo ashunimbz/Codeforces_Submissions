@@ -1,0 +1,46 @@
+/*
+Don't say a word, just come over and lie here with me
+'Cause I'm just about to set fire to everything I see
+I want you so bad I'll go back on the things I believe
+There I just said it, I'm scared you'll forget about me
+*/
+
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <unordered_map>
+#include <algorithm>
+#include <unordered_set>
+#include <iomanip>
+#include <climits>
+#define ll   long long int 
+#define mod 1000000007
+#define inf  200000000000000
+#define eps  0.0000000000001
+using namespace std ;
+ll n ;  
+
+ll arr[] =  {1, 5, 10, 20, 100} ; 
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;
+  cin>>n ;  
+  ll p  =    n  ;  
+  ll ans = 0  ; 
+  while(p)
+  {
+    for(int i  = 4 ;  i>= 0 ; --i)
+    {
+        if(arr[i] <= p )
+          { p -= arr[i] ;
+            ans++ ;
+            break; }   
+    } 
+  }  
+  cout<<ans ; 
+return   0 ; }
