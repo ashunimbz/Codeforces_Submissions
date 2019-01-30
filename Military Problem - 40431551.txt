@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll    long long int 
+#define MOD 1000000007
+#define inf  2000000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+ll n , q ;  
+
+vector<ll>adj[200006] ; 
+ll size[200006] ; 
+
+vector<ll>order ;  
+map<ll ,ll >mp  ; 
+
+void dfs(ll node ,ll parent)
+{
+    order.push_back(node) ;
+    mp[node] = order.size()-1 ;  
+    size[node] = 1 ; 
+    for(ll u  : adj[node])
+    {
+       if(u == parent)
+        continue ;  
+        dfs(u ,  node) ;
+        size[node] += size[u] ;   
+    }
+}
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;
+   cin>>n>>q ;  
+   for(ll i  = 2 ;  i <= n  ; ++i)
+   {
+      ll  u ; 
+      cin>>u ;  
+      adj[u].push_back(i) ; 
+      adj[i].push_back(u) ; 
+
+   }  
+   dfs(1,  0);
+   while(q--)
+   {
+     ll  u ,v ; cin>>u>>v ;  
+     if(size[u] < v)
+      cout<<-1<<'\n' ;  
+    else
+    {
+       cout<<order[mp[u] + v - 1]<<"\n";
+    }
+   }
+   return   0  ;
+
+}
