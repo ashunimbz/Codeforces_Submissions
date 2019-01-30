@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <map>
+#include <set>
+#include <cmath>
+#include <iomanip>
+#include <climits>
+#include <stack>
+#define ll long long int
+#define MOD 100000000;
+using namespace std ;
+
+
+
+int main()
+{
+  int n , k ;
+  cin>>n>>k ;
+  string s ;
+  cin>>s ;
+
+  unordered_map<char ,int>um ;
+  for(int  i =  0 ; i < s.length() ; ++i)
+  {
+
+     um[s[i]] =  i  ;
+
+  }
+
+  ll maxDoorsOpened = -1 ;
+  ll doors  = 0 ;
+  bool isopen[127] ;
+  fill(isopen , isopen + 127 , false) ;
+  for(ll i = 0 ;  i< s.length() ; ++i)
+  {
+     if(!isopen[s[i]])
+     {
+     isopen[s[i]] = true ;
+     doors++ ;
+
+     }
+     maxDoorsOpened  = max(maxDoorsOpened  , doors) ;
+
+     char yo = s[i] ;
+
+     if((*um.find(yo)).second == i )
+     doors-- ;
+
+
+  }
+
+
+ // cout<<maxDoorsOpened<<"\n" ;
+
+  if(maxDoorsOpened > k)
+  cout<<"YES\n" ;
+  else
+  cout<<"NO\n" ;
+
+return  0 ;
+}
