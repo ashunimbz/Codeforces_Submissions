@@ -1,0 +1,131 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#include <cstdio>
+#define ll   long long int
+#define MOD 1000000007
+#define inf  20000000000000
+#define eps  0.0000000000001
+using namespace std ;
+ll  n , k ;  
+struct Node{
+Node* left = NULL ;   
+Node* right = NULL ;  
+ll LeftNum  =  0 ;
+ll RightNum =  0  ;  
+};
+
+struct Node* root  = NULL  ;  
+
+void Insert(ll val)
+{
+   if(root == NULL)
+   {
+     root =  new Node() ;  
+   }
+
+      Node* ptr = root ;   
+      for(ll i    =  31  ;  i >= 0  ; --i)
+      {
+          if( (val & (1 << i) ) >  0 )
+          {
+              ptr->RightNum++ ;  
+              if(ptr->right == NULL)
+                ptr->right =  new Node() ;  
+              ptr =  ptr->right ;  
+          }
+          else
+          {
+               ptr->LeftNum++ ;  
+              if(ptr->left == NULL)
+                ptr->left =  new Node() ;  
+              ptr =  ptr->left ; 
+          }
+      }
+   
+}
+
+ll query(ll val)
+{
+  ll ans = 0 ; 
+  Node* ptr =  root ;
+ if(ptr == NULL)
+  return 0 ;
+    for(ll i  = 31 ;  i >= 0  ; --i)
+    {
+       ll p = 0 ,q= 0 ;  
+       if( ( (1<<i) & val )   > 0 ) 
+        p=1 ;
+       if( ( (1<<i) & k )   > 0 ) 
+        q=1 ;
+       if( p == 0 && q == 1)
+       {
+         ans += ptr->LeftNum ;
+         if(ptr->right == NULL)
+          return ans ; 
+         ptr = ptr->right ;   
+       }    
+       else if(p == 1 && q == 0)
+       {
+         if(ptr->right == NULL)
+          return ans ; 
+         ptr = ptr->right ; 
+       }
+       else if(p  == 0 && q == 0)
+       {
+        if(ptr->left == NULL)
+          return ans ; 
+         ptr =  ptr->left ;  
+       }
+       else
+       {
+         ans += ptr->RightNum ;
+         if(ptr->left == NULL)
+          return ans ;   
+         ptr  = ptr->left ;  
+       }
+    }
+    return ans ; 
+}
+
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;
+  
+    root = NULL ; 
+   cin>>n>>k ;
+   ll ans = 0 ;   
+   ll Xor   = 0 ;     
+ 
+   for(ll i  = 0 ;  i < n ;  ++i)
+   {
+     ll yo ;  cin>>yo ;
+     Xor =  (Xor ^ yo );  
+     ans += query(Xor) ;  
+     if(Xor < k )
+     ans++ ;   
+     Insert(Xor) ; 
+   }
+  ll aa ; 
+  if(n == 1)
+    aa = 1 ; 
+  else
+  aa =  ( n * (n +1) )/2 ;  
+  cout<<aa - ans<<"\n"   ;
+  
+
+
+ 
+   return  0  ;
+  
+} 
+
