@@ -1,0 +1,76 @@
+
+/*
+Don't say a word, just come over and lie here with me
+'Cause I'm just about to set fire to everything I see
+I want you so bad I'll go back on the things I believe
+There I just said it, I'm scared you'll forget about me
+*/
+
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll   int 
+#define MOD 1000000007
+#define inf  200000000000000
+#define eps  0.0000000000001
+using namespace std ;  
+ll n  , k  ; 
+bool  DP[501][501][501] ;
+ll arr[501] ; 
+vector<ll>v ; 
+set<ll>se ; 
+void rec(ll i , ll j ,ll sub)
+{
+    if(j > k)
+      return ;  
+    if(DP[i][j][sub])
+    return ;     
+   if(i == n)
+    { 
+       if(j == k)
+        { 
+          se.insert(sub) ; 
+          return ;
+        }
+        return ; 
+    }
+    rec(i + 1  , j ,  sub) ; 
+    rec(i + 1 ,  j + arr[i] ,sub ) ; 
+    rec(i + 1  , j + arr[i]  , sub + arr[i]) ; 
+   DP[i][j][sub]  = true ; 
+} 
+
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+  cin>>n>>k ;  
+  for(ll  i =  0  ; i < n ; ++i)
+    cin>>arr[i] ; 
+  for(int  i  = 0  ; i < 501 ; ++i)
+  {
+     for(int j = 0 ; j < 501 ; ++j)
+     {
+       for(int  k  =  0 ; k< 501 ; ++k)
+        DP[i][j][k]  =false ;
+     }
+  }
+  rec(0 , 0 , 0 ) ;  
+
+  cout<<se.size()<<"\n" ; 
+  for(auto jo :se)
+    cout<<jo<<" ";
+
+ return   0  ;
+ }
+
+
