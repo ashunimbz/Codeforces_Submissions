@@ -1,0 +1,69 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <utility>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int 
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie()  
+#define MOD  1000000007 
+
+ll d , x, y;
+void extendedEuclid(int A, int B) {
+    if(B == 0) {
+        d = A;
+        x = 1;
+        y = 0;
+    }
+    else {
+        extendedEuclid(B, A%B);
+        int temp = x;
+        x = y;
+        y = temp - (A/B)*y;
+    }
+}
+
+
+int main(){
+  IOS ; 
+  ll a , b  , c;  
+  cin>>c>>a>>b ;
+  extendedEuclid(a,b) ; 
+  if( (c % d)   != 0)
+  {
+     cout<<"NO\n" ;
+     return 0 ; 
+  }
+ 
+  int k   =  c / d ;
+  
+  x = k  *x ; 
+  y = k  *y ; 
+  ll g = d  ;
+  for(int t =  -10000001;  t < 10000001 ;  ++t)
+  {
+    ll x1 = x - (b * t)/g ; 
+    ll y1 = y  + (a*t)/g ; 
+    if(x1 >=0 && y1 >= 0)
+    {
+       cout<<"YES\n" ; 
+       cout<<x1<<" "<<y1<<"\n" ; 
+       return 0 ; 
+    }
+
+  }
+  cout<<"NO\n" ; 
+
+
+
+ 
+return   0 ;
+} 
