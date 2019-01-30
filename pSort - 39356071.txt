@@ -1,0 +1,92 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll  long long int
+#define mod 1000000007
+#define inf  20000000000
+#define eps  0.0000000000001
+using namespace std ;  
+ll n ;  
+ll arr[101] ; 
+ll par[101] ; 
+ll d[101] ; 
+ll size[101] ;
+
+ll root(ll x)
+{
+   while( par[x] != x)
+   {
+      par[x]  = par[ par[x]] ; 
+      x = par[x] ;  
+   }
+   return x ; 
+}
+
+void Union(ll x ,ll y)
+{
+   ll rootx  = root(x) ; 
+   ll rooty = root(y) ; 
+   if(rootx == rooty)
+    return ; 
+
+    if(size[rootx] > size[rooty])
+    {
+       par[rooty] = rootx ;  
+       size[rootx] += size[rooty] ; 
+    } 
+    else
+    {
+       par[rootx] = rooty  ; 
+       size[rooty] += size[rootx] ; 
+    }
+}
+
+
+
+
+int main()
+{
+  
+  
+  cin>>n  ; 
+  for(int   i =  1 ;  i <= n  ;++i)
+   { 
+     cin>>arr[i] ;
+     par[i] =  i  ;
+     size[i]  =  1 ;   
+   }
+   for(ll   i =  1 ; i   <=  n ; ++i )
+   {
+     cin>>d[i] ; 
+      
+     ll na1  =  i  -d[i] ; 
+     ll na2 = i  + d[i] ;  
+     if(na1 > 0 && na1 <= n)
+      Union(arr[i] , arr[na1]) ; 
+    if(na2 > 0 && na2 <= n)
+      Union(arr[i] , arr[na2]) ; 
+   }  
+  bool ans  = true ;  
+   for(int i   = 1 ;  i<= n  ;++i)
+   {
+            ll r1  = root(i) ; 
+            ll r2 =  root(arr[i]) ; 
+            if(r1 != r2)
+            {
+               ans = false ; 
+               break ;  
+            }
+   }
+   if(ans )
+    cout<<"YES";
+  else
+    cout<<"NO" ;
+
+return   0 ; }
