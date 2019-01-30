@@ -1,0 +1,91 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <map>
+#include <set>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <numeric>
+#include <string>
+#include <set>
+#include <cmath>
+#include <stack>
+#include <cctype>
+#define MOD 1000000007
+#define ll  long long int
+using namespace std;
+
+int main()
+{
+   ios::sync_with_stdio(false) ;cin.tie(0) ;
+   cout.tie(0) ;
+
+int n , m ;
+cin>>n>>m ;
+
+
+char arr[n][m] ;
+
+for(int i = 0 ;  i< n ;++i)
+{
+    for(int j =  0 ; j < m ; ++j)
+    {
+
+        cin>>arr[i][j] ;
+    }
+}
+
+
+
+set<int>s1 ;
+set<int>s2 ;
+for(int i = 0  ; i < n ; ++i)
+{
+    for(int j = 0 ;  j < m ;++j)
+    {
+
+        if(arr[i][j] == 'B')
+        {
+            s1.insert(i) ;
+            s2.insert(j) ;
+
+        }
+    }
+}
+int rowdiff ;
+int colomdiff;
+if(s1.size() != 0){
+ rowdiff = (*s1.rbegin()) - (*s1.begin())  ;
+ colomdiff = ((*s2.rbegin()) - (*s2.begin())) ;}
+else
+{
+    cout<<1;
+    return 0;
+}
+
+if( (rowdiff + 1 ) > m || (colomdiff + 1) > n)
+{
+    cout<<-1 ;
+    return 0 ;
+}
+int yolo =  0;
+
+int sq  = max(rowdiff + 1  ,colomdiff + 1);
+
+int salsa= 0 ;
+for(int i =  0; i < n ; ++i)
+{
+    for(int j  = 0 ;  j< m ; ++j)
+    {
+        if(arr[i][j] == 'B')
+            salsa++;
+    }
+}
+
+cout<<sq* sq - salsa ;
+
+
+return 0
+;}
