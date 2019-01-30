@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+#define ll long long 
+#define inf (ll)1e15
+#define mod 1000000007
+using namespace std;
+
+
+int main() {
+ ios::sync_with_stdio(false);cin.tie(0);cout.tie(0) ;
+ cout<<fixed<<setprecision(16) ;
+ ll  n , m ;
+ cin>>n>>m ;  
+ double arr[n] ; 
+ for(ll i =  0 ; i  < n ;++i)
+ {
+       double a , b ; 
+       cin>>a>>b ;  
+       arr[i] =  a/b ;  
+ }
+ sort(arr , arr+ n ) ;
+  cout<<arr[0]*m ; 
+ 
+
+    return 0; 
+
+}
