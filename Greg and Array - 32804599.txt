@@ -1,0 +1,84 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <utility>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int 
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie()  
+#define MOD  1000000007  
+
+
+ 
+int main(){
+ IOS;
+
+ ll n , m , k ;
+ cin>>n>>m>>k ; 
+ ll arr[n+1]  ;
+ for(ll i  = 1   ; i <= n  ; ++i)
+ 	cin>>arr[i] ;
+
+ 	struct queries{
+ 	ll  l ,r,d ; 
+
+ 	} ;
+  queries Qarr[m  + 1] ; 
+  for(int  i  = 1 ; i <= m  ; ++i)
+   cin>>Qarr[i].l>>Qarr[i].r>>Qarr[i].d ;  
+ 
+ ll Carr[m+1] ; 
+ ll Carr2[m+1]  ; 
+ fill(Carr  ,Carr + m + 1 , 0) ; 
+ fill(Carr2  ,Carr2 + m + 1 , 0) ; 
+ ll t = k ; 
+ while(t--)
+ {
+
+ 	  ll q1 , q2  ;
+ 	  cin>>q1>>q2  ;
+ 	  Carr[q1]++ ;
+ 	  if(q2 <= m)
+ 	  Carr[q2+1]-- ;  
+ }
+ ll var   = 0 ; 
+ for(ll i =  1 ; i <=  m ; ++i )
+ {
+ 	  var += Carr[i] ; 
+ 	  Carr2[i]  = var ; 
+ 	 
+ }
+ll final[n+1]  ;
+fill(final , final + n + 1 ,  0) ; 
+ll var2 = 0  ;
+ for(int i  = 1 ;  i<=  m   ; ++i)
+ {
+
+ 	 var2 =  Carr2[i]   ;
+ 	 ll l = Qarr[i].l  ; 
+ 	 ll r =  Qarr[i].r   ;
+ 	 ll d = Qarr[i].d  ;
+ 	 final[l] += var2*d  ;
+ 	 if(r != n)
+ 	 	final[r+1] -= var2*d  ;
+
+
+ }
+ll extra  = 0 ; 
+ for(int i    =  1 ;  i <= n   ; ++i)
+ 	{
+ 		 extra += final[i]  ;
+ 		cout<<arr[i] + extra<<" " ; 
+
+    }
+  
+return   0 ;
+}
