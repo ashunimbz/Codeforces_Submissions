@@ -1,0 +1,66 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie() ;  
+ll arr[103] ; 
+ll DP[103][3] ; 
+int  n  ; 
+ll rec(int i  ,  int single)
+{
+   if(single > 2)
+    return (ll)1e9 ; 
+
+     if(i >= 2*n )
+     {
+         if(single != 2 )
+          return (ll)1e9 ; 
+        return  0 ; 
+     }
+     if(i == 2*n-1)
+     { return rec(i+1 , single  + 1)  ;}
+      if(DP[i][single] != -1)
+      {return DP[i][single] ;}   
+return DP[i][single] =   min( arr[i+1] - arr[i]  +  rec(i + 2  , single ) , 
+     
+             rec(i + 1  , single + 1)
+        ) ;  
+
+}
+
+
+int main()
+{
+  //int n ; 
+  cin>>n  ; 
+  // int arr[2*n]  ; 
+   for(int i  = 0  ; i < 2 * n  ; ++i)
+    cin>>arr[i] ;  
+
+  for(int i  = 0 ;  i < 103 ; ++i)
+  {
+     //for(int j   = 0 ;  j< 101  ; ++j)
+    //{
+        for(int k  = 0 ; k  < 3 ; ++k)
+        {
+             DP[i][k] = -1 ; 
+        }
+     
+  }
+
+  sort(arr , arr + 2*n)  ; 
+  cout<<rec(0  , 0) ; 
+
+return  0 ;  
+}
+  
