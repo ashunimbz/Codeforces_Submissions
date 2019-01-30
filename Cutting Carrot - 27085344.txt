@@ -1,0 +1,20 @@
+#include <iostream>
+#include <cmath>
+#include<limits>
+#define ll long long
+using namespace std;
+
+int main()
+{
+   int n , h ;
+   cin>>n>>h ;
+   cout.precision(20);
+
+   for(int j  =  1 ;  j < n ; ++j)
+   {
+      double ans  =  (double)sqrt((double)h*h*j/n) ;
+       cout<<ans<<" ";
+
+   }
+    return 0;
+}
