@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <unordered_map>
+#include <algorithm>
+#include <unordered_set>
+#include <iomanip>
+#include <climits>
+#define ll   long long int 
+#define mod 1000000007
+#define inf  200000000000000
+#define eps  0.0000000000001
+using namespace std ;  
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+  ll a , b,c ,n ;cin>>a>>b>>c>>n ;  
+
+   if(n == 0 )
+   {
+     cout<<-1 ; 
+     return  0 ; 
+   }
+  ll passed  = a + b  -c ; 
+  if( c > a || c > b )
+  {
+     cout<<-1 ; 
+     return  0 ; 
+  } 
+  if(passed < 0 )
+  {
+    cout<<-1 ; 
+     return  0 ; 
+  }
+  if(   passed <= (n -  1) ) 
+   {
+      cout<<n - passed ; 
+   }
+  else
+    cout<<-1 ;
+  
+
+  
+return   0 ; }
