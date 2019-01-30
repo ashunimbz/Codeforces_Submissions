@@ -1,0 +1,66 @@
+
+/*
+Don't say a word, just come over and lie here with me
+'Cause I'm just about to set fire to everything I see
+I want you so bad I'll go back on the things I believe
+There I just said it, I'm scared you'll forget about me
+*/
+
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll   long long int 
+#define MOD 1000000007
+#define inf  200000000000000
+#define eps  0.0000000000001
+using namespace std ;  
+ll n  ; 
+ll arr[100005] ; 
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+  ll n  ;
+  cin>>n  ;
+
+  multiset< pair <ll ,ll > >  ms ; 
+  for(ll i  =  0 ; i < n  ;++i)
+    {
+      cin>>arr[i] ; 
+      ms.insert({arr[i] ,  i}) ; 
+    }
+ 
+    auto var =  *ms.begin() ;  
+    ll low =  var.first ;  
+    
+    ll cur = low % n  ;
+    ll used =  low  ;
+    ll ans  ;   
+    while(1)
+    {
+       if(cur == n)
+        cur = 0 ; 
+       arr[cur] -= used ; 
+       if(arr[cur] <= 0 )
+       {
+          ans = cur ; 
+          break ;  
+       }
+       used++ ; 
+       cur++ ; 
+    }
+  
+ cout<<ans + 1 ; 
+
+ return   0  ;
+ }
+
