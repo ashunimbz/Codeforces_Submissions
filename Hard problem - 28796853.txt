@@ -1,0 +1,82 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <cmath>
+#include <iomanip>
+#define ll long long int
+
+using namespace std;
+ll memo[100001][2] ;
+string arr[100001] ;
+ll ci[100001] ;
+ll rec(int i ,int n ,int reversed)
+{
+
+   if(i == n)
+   return 0 ;
+   if(i == 0)
+   {
+    return  memo[i][reversed] = min(rec(i+1,n,0) , rec(i+1 , n,1) + ci[i]) ;
+   }
+
+   if(memo[i][reversed] != -1)
+   return memo[i][reversed] ;
+
+   string yolo = arr[i] ;
+   reverse(yolo.begin() , yolo.end()) ;
+   string lala = arr[i-1] ;
+   reverse(lala.begin() , lala.end()) ;
+   if(reversed)
+  {
+   ll a =  (ll)1e16;
+   ll b = (ll)1e16;
+   if(arr[i] >= lala  )
+   a =  rec(i+1 , n , 0) ;
+   if(yolo >= lala)
+   b = rec(i+1 , n ,1) + ci[i] ;
+   return memo[i][reversed] =  min(a,b) ;
+   }
+   else
+   {
+    ll a =  (ll)1e16;
+   ll b = (ll)1e16;
+   if(arr[i] >= arr[i-1] )
+   a =  rec(i+1 , n , 0) ;
+   if(yolo >= arr[i-1])
+   b = rec(i+1 , n ,1) + ci[i];
+ return memo[i][reversed] =  min(a,b) ;
+   }
+
+
+
+}
+
+
+
+int main()
+{
+   ll n ; cin>>n ;
+   for(ll i   = 0  ; i < 100001 ; ++i)
+   {
+     for(ll j  = 0  ; j < 2 ; ++j)
+     memo[i][j] = -1 ;
+   }
+
+   for(int i = 0 ;  i< n ; ++i)
+   cin>>ci[i] ;
+
+   for(int i  = 0 ; i< n ; ++i)
+    cin>>arr[i] ;
+
+
+
+   ll yo = rec(0,n,0) ;
+   if(yo >= (ll)1e16)
+   cout<<-1 ;
+   else
+   cout<<yo ;
+    return 0;
+}
