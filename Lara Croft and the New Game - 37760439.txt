@@ -1,0 +1,57 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int 
+#define mod 1000000007
+#define inf  100000000000
+using namespace std ;  
+
+
+int main()
+{
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+  ll n ,  m , k  ; cin>>n>>m>>k ;
+  if(k >= (n*m - 1))
+  {
+  	 cout<<1<<" "<<2<<"\n" ; 
+  	 return  0  ;
+  }  
+  if(k  <= n + m  - 2)
+  {
+     if(k <= ( n - 1 )  )
+     {
+     	 cout<<k+1<<" "<<1 ; 
+     	 return  0 ; 
+     }
+     else
+     {
+     	ll rem = k - (n-2)  ;
+     	 cout<<n<<" "<<rem; 
+     }
+
+  	 return   0 ;  
+  }	 
+ 
+ ll remain  =  k   - (n + m - 1) ; 
+
+ ll cola = remain/(m-1) ; 
+ ll remainder  = remain % (m-1) ; 
+
+ ll row , col ; 
+ if(cola % 2 == 0){
+ row =  n - cola - 1  ; 
+ col    =  m  - remainder ;}
+ else
+ {
+ 	 row =  n - cola - 1  ; 
+ 	 col  = 2 + remainder  ; 
+ }  
+ cout<<row<<" "<<col ; 
+return  0 ;  }
