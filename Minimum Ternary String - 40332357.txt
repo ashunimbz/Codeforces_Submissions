@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll    long long int 
+#define MOD 1000000007
+#define inf  2000000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+
+ 
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+   string s ; cin>>s ;
+   int n   = s.length() ; 
+   string ans = "" ;
+   int to  = n ;    
+   for(int i  =  0 ;  i < s.length() ; ++i)
+   {
+
+      if(s[i] == '2')
+       {
+          to =  i  ; 
+          break ;  
+       }
+       ans += s[i] ;  
+   }
+   for(int p   = to  ;  p < n ; ++p)
+   {
+     if(s[p] == '1')
+      ans += "1"  ; 
+   }
+  
+  sort(ans.begin() ,  ans.end()) ;  
+  for(int i  = to ;  i < n ; ++i)
+  {
+     if(s[i] != '1')
+      ans += s[i] ;  
+  }
+   cout<<ans ; 
+   
+     
+   return   0  ;
+
+}
+ 
