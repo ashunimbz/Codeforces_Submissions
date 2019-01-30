@@ -1,0 +1,94 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll   long long int 
+#define MOD 1000000007
+#define inf  200000000000000
+#define eps  0.0000000000001
+using namespace std ;  
+ll n, m  ; 
+ll price[100005];
+vector<ll>nodes ; 
+bool visited[100005]; 
+vector<ll>adj[100005] ; 
+vector<ll>rev[100005] ; 
+ll totalcomponents = 0  ; 
+vector< vector<ll> > scc ; 
+vector<ll>tp ;  
+ll tobe  = 0 ;  
+ll now = inf ; 
+map<ll ,ll>calci ;  
+void dfs(ll cur)
+{
+   visited[cur] = true ;  
+   for(ll yo : adj[cur])
+   {
+      if(!visited[yo])
+        dfs(yo) ; 
+   }
+   nodes.push_back(cur) ; 
+}
+
+void dfs2(ll cur)
+{
+   calci[price[cur]]++ ; 
+   now  = min(now , price[cur]) ; 
+   tp.push_back(cur) ; 
+   visited[cur]  = true ;  
+    for(ll yo : rev[cur])
+   {
+      if(!visited[yo])
+        dfs2(yo) ; 
+   }
+}
+
+
+
+
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+  cin>>n  ; 
+  for(ll i  = 1 ; i <= n ; ++i)
+  cin>>price[i] ; 
+  cin>>m;
+  for(ll i = 0  ; i < m ; ++i)
+  {
+     ll u ,v;cin>>u>>v ; 
+     adj[u].push_back(v) ;
+     rev[v].push_back(u) ;  
+  }
+ for(int i =  1 ;  i <= n  ;++i)
+   if(!visited[i])
+    dfs(i) ; 
+  reverse(nodes.begin() ,  nodes.end() )  ; 
+  fill(visited  , visited  + n + 1  ,false) ;
+  ll ans = 1 ;  
+  for(int   i  = 0 ; i <  (ll)nodes.size() ; ++i)
+  {
+      if(!visited[nodes[i]])
+      {
+        calci.clear() ; 
+        totalcomponents++ ;
+         tp.clear() ; now = inf ;   
+         dfs2(nodes[i]) ;
+        scc.push_back(tp) ;
+        tobe += now ;
+        ans  = (ans * calci[now])% MOD ;  
+      }
+  }
+  
+  cout<<tobe<<" "<<ans ; 
+ return   0  ;
+ }
+
+
