@@ -1,0 +1,68 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <set>
+#include <unordered_set>
+#include <map>
+#include <unordered_map>
+#include <cmath>
+using namespace std ; 
+#define mod 1000000007
+#define ll long long int
+#define maxsize 1000001
+bool contains(int u  , int v)
+{
+	  while(u > 0)
+	  {
+	  	 int r =  u % 10 ; 
+	  	 u  = u/10 ;  
+	  	 if(r == 7)
+	  	 	return  true ; 
+	  } 
+	  while(v > 0)
+	  {
+	  	 int r =  v % 10 ; 
+	  	 v = v/10 ;  
+	  	 if(r == 7)
+	  	 	return  true ; 
+	  }
+	  return false ;   
+}
+
+int main()
+{
+	  ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+	  int x ; 
+	  cin>>x ; 
+	  int hour ; 
+	  cin>>hour ; 
+	  int min ;
+	  cin>>min ;
+	  int ans = 0 ; 
+	  if(contains(hour  , min))
+	  {
+        cout<<ans  ;  
+        return 0  ;
+	  }
+	  while(1)
+	  {
+	  	  min =  min  - x ;  
+	  	  if(min < 0)
+	  	  {
+	  	  	 hour--  ;
+	  	  	 if(hour <  0)
+	  	  	 	hour  = 23 ; 
+	  	  	 min  = 60 + min  ; 
+	  	  }
+	  	  ans++ ; 
+	  	  if(contains(hour  , min))
+	  	  	break ;  
+	  }
+	  cout<<ans ; 
+
+
+	 
+	
+    return 0 ; 
+}
