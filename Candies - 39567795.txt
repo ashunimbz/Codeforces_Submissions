@@ -1,0 +1,87 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <unordered_map>
+#include <algorithm>
+#include <unordered_set>
+#include <iomanip>
+#include <climits>
+#define ll   long long int 
+#define mod 1000000007
+#define inf  200000000000000
+#define eps  0.0000000000001
+using namespace std ;
+
+
+ll n ;
+
+bool func(ll  k )
+{
+  ll po =  n  ;
+  ll c =  0 ; 
+  ll vasya =  0  ;
+  ll petya =  0 ; 
+   while(1)
+   {
+     if(c % 2 == 0 )
+     {
+       if(po < k )
+       {
+          vasya += po ;
+           po =   0  ;  
+           break  ;
+       }
+       else
+        { 
+          vasya += k ;
+          po -= k  ;
+        }  
+      if(po == 0)
+        break ; 
+     }
+     else
+     {
+         if(po >= 10)
+         {
+           ll calci =  po/10 ; 
+           petya += calci ; 
+           po -= calci ; 
+         }
+     }
+ 
+   c++;  }
+   if( vasya >=   petya )  
+    return true ; 
+  return false ; 
+}  
+
+
+ll bin()
+{
+   ll lo  =  1 ,  hi  = n  ; 
+   while(lo < hi)
+   {
+        ll mid = lo + (hi - lo)/2 ; 
+
+        if( func(mid))
+          hi  = mid  ; 
+        else
+          lo  = mid + 1;  
+   }
+   return lo  ; 
+}
+
+
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+  cin>>n ;   
+  cout<<bin();
+
+
+  
+return   0 ; }
