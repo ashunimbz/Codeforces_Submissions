@@ -1,0 +1,82 @@
+#include <algorithm>
+#include <cassert>
+#include <cstring>
+#include <iomanip>
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <sstream>
+#include <vector>
+
+
+#define INF 1000000000
+#define MOD 1000000007
+#define ALL(x) std::begin(x), std::end(x)
+
+
+inline int distance(int a, int b)
+{
+  int c = (a - b + 26) % 26;
+
+  return std::min(c, 26 - c);
+}
+
+int main(int argc, char** argv)
+{
+  std::cin.tie(0);
+  std::ios_base::sync_with_stdio(0);
+
+  int n, nn, p, a[111111];
+
+  std::string s;
+
+  std::cin >> n >> p >> s;
+
+  nn = n / 2;
+  
+  for (int i = 0; i < nn; i ++)
+    a[i] = distance(s[i], s[n - i - 1]);
+
+  if (p <= nn) {
+    p -= 1;
+  }
+  else {
+    p = n - p;
+  }
+
+  int l = INF, r = -1, c = 0;
+
+  for (int i = 0; i < nn; i ++) {
+    c += a[i];
+
+    if (a[i]) {
+      l = std::min(i, l);
+      r = std::max(i, r);
+    }
+  }
+
+  if (c == 0) {
+    std::cout << c << std::endl;
+  }
+  else {
+    int ll = p - l;
+    int rr = r - p;
+
+    if (l <= p && r <= p) {
+      std::cout << ll + c << std::endl;
+    }
+    else if (l <= p && r >= p) {
+      std::cout << (ll + rr) * 2 - std::max(ll, rr) + c << std::endl;
+    }
+    else {
+      std::cout << rr + c << std::endl;
+    }
+  }
+
+  return 0;
+}
