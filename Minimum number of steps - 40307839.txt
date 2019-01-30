@@ -1,0 +1,25 @@
+MOD =  1000000007
+
+
+liste = []
+def comp():
+    ans = 1
+    liste.append(ans)
+    for i in range(1,1000001):
+        ans = (ans * 2)%MOD
+        liste.append(ans)
+
+s=input()
+acount=0
+cur = 0
+total= 0
+comp()
+for c in s:
+    if c=='a':
+        cur =cur + 1
+        total = total + 1
+    else:
+        total =  (total + liste[cur])%MOD
+
+
+print(total - len(s))
