@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int 
+#define mod 1000000007
+#define inf  100000000000
+using namespace std ;  
+
+int main()
+{
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+
+  ll  r , g , b; cin>>r>>g>>b ;  
+
+  ll arr[3] ;  
+  arr[0]   = r ;  
+  arr[1]  = g ;  
+  arr[2]   = b ;  
+  sort(arr , arr + 3) ; 
+  ll sum  =  arr[0] + arr[1] + arr[2] ; 
+  if(arr[2] >= 2*(arr[0] + arr[1]))
+  	cout<<arr[0] + arr[1] ;  
+  else
+  	cout<<sum/3 ; 
+
+  
+return  0 ;  }
