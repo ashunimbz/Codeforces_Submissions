@@ -1,0 +1,86 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#define ll long long int 
+#define mod 1000000007
+#define inf  1000000000000
+using namespace std ;  
+ 
+int main()
+{
+	ios::sync_with_stdio(false) ;cin.tie(0) ; cout.tie(0) ;
+  string s ; cin>>s ; 
+  int z[s.length()]  ;
+  int n   =s.length() ;  
+    int  l      =  0    ,r =  0 ;  
+   for(int i   = 1   ;  i < s.length() ; ++i)
+   {
+    
+       if(i  > r)
+       {
+         l   =    i   ; 
+         r =   i  ; 
+          while(r < n  && s[r - l] == s[r])
+            r++ ; 
+          z[i]   =  r -  l  ;  
+          r-- ;  
+       }
+       else
+       {
+           int k  =    i  - l  ;  
+          if(z[k] + i <= r)
+          {
+             z[i]  =  z[k]  ;  
+          }
+          else
+          {
+              l =  i  ;  
+              while(r < n  && s[r-l] == s[r])
+                r++ ; 
+              z[i]    = r-l  ; 
+              r-- ; 
+          }
+       }
+   
+
+   } 
+  z[0] =  n    ;  
+  ll c[n+1] ;  
+  fill(c   ,c + n + 1 ,  0  )  ;  
+  for(int i   =  0 ;  i < n  ; ++i)
+    c[z[i]]++ ;  
+  ll suffix[n  + 1] ;  
+  fill(suffix  , suffix + n + 1 ,  0 ) ; 
+  suffix[n]   =  1 ;
+  for(int i   =  n-1 ;    i  > 0  ; --i)
+  {
+
+      suffix[i]   =suffix[i+1] + c[i]  ; 
+  }
+
+  bool matches[n+1]  ; 
+  fill(matches  , matches + n + 1  , false)  ; 
+  matches[0]    = true  ; 
+  matches[n]    =true  ;  
+for(int i    = 0 ;  i < n ; ++i)
+{
+     if(z[i] + i == n )
+      matches[z[i]]  =  true ; 
+}
+vector< pair< int,  int> >vec ;  
+for(int i   = 1 ; i <= n  ;++i)
+{
+     if(c[i] >  0 && matches[i])
+      vec.push_back({ i , suffix[i]}) ;  
+}
+cout<<vec.size()<<"\n" ;  
+for(int i    =  1 ;  i <= n  ; ++i )
+ {
+     if(c[i] > 0 && matches[i])
+      cout<<i<<" "<<suffix[i]<<'\n' ;
+ }
+
+
+   
+return 0 ;  }
