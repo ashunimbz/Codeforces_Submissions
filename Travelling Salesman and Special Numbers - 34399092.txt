@@ -1,0 +1,108 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <stack>
+#include <queue>
+#include <set>
+#include <unordered_set>
+#include <unordered_map>
+#include <iomanip>
+#include <climits>
+using namespace std ;
+#define maxsize 100001  
+#define ll long long int
+#define mod 1000000007
+ll arr[1025] ; 
+ll DP[1001][1001][2] ; 
+  ll init =  0 ;  
+  ll k ; 
+  ll n    ; 
+  string s ; 
+  ll rec(ll cur , ll noofsetbits ,ll below)
+  {
+  	if(cur == n)
+  	{
+  		
+  		 if( arr[noofsetbits] == (k-1) )  
+  		 	
+  		 		return 1;
+  		 	return  0 ; 
+    }
+    if(DP[cur][noofsetbits][below] != -1)
+    	return DP[cur][noofsetbits][below] ; 
+     ll a =  0  , b =  0 ;
+     if(s[cur] != '1')
+      {
+      	a  = rec(cur + 1   , noofsetbits ,below ) ;  
+      	if(below == 1)
+      b   =  rec(cur + 1   , noofsetbits + 1  ,below) ; 
+      }
+    else
+    {
+    	 a =  rec(cur + 1  , noofsetbits + 1 , below) ; 
+    	 b = rec(cur + 1 , noofsetbits   ,1) ; 
+    }
+    return DP[cur][noofsetbits][below] =  (a%mod + b%mod)%mod  ;
+
+  }
+  int num(ll x)
+  {
+  	 int c =  0 ; 
+  	 while(x)
+  	 {
+            if(x & 1 )
+            	c++ ; 
+            x = x >> 1 ; 
+  	 }
+  	 return c ; 
+  }
+
+  void process()
+  {
+    arr[1]  =  0 ;
+    for(int i    =  2  ; i < 1025  ; ++i)
+    {
+    	   int j   =  i   ;
+    	   int c  = 0 ;  
+          while(j != 1)
+          {
+            ll yo = num(j)  ;
+            j  = yo  ;
+            c++ ; 
+          } 
+          arr[i]  = c ; 
+    }
+  }
+
+
+int main()
+{
+	ios::sync_with_stdio(false) ;cin.tie(0) ; cout.tie(0) ; 
+	for(int  i  = 0  ; i < 1001 ; ++i )
+	{
+		 for(int j   = 0 ;  j< 1001 ; ++j)
+		 {
+		 	for(int  k  = 0  ; k < 2 ; ++k)
+		 		DP[i][j][k]   = -1 ; 
+		 }
+	}
+	process() ; 
+	cin>>s ;
+	n  =s.length() ;  
+	cin>>k ; 
+	if(k == 0)
+	{
+		 cout<<1 ; 
+		 return  0  ; 
+	}
+	arr[0]  =-9   ;
+	
+       if(k == 1)
+	cout<<rec(0  , 0, 0 ) - 1 ; 
+else
+	cout<<rec(0  , 0, 0 ) ; 
+
+return 0 ; 
+}
