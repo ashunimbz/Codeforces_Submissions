@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#define ll long long int 
+#define mod 1000000007
+#define inf  1000000000000
+using namespace std ;  
+string arr[100001] ; 
+ll cost[100001] ; 
+unordered_map< string ,  ll >us ;  
+int main()
+{
+	ios::sync_with_stdio(false) ;cin.tie(0) ; cout.tie(0) ; 
+  ll n,  k ,m ; cin>>n>>k>>m ;  
+  for(int i  = 0 ; i < n ; ++i)
+    cin>>arr[i] ;  
+  for(ll i  = 0 ; i < n ; ++i)
+    cin>>cost[i] ;  
+  
+  for(int i  = 0 ; i  < k ; ++i)
+  {
+     ll x ; cin>>x ; 
+     ll mina =  inf ; 
+     vector<ll>tp  ;  
+     for(int j =  0 ;  j < x ; ++j)
+     {
+        ll p  ; cin>>p ;  
+        p-- ; 
+        tp.push_back(p) ; 
+        mina  =  min(mina ,  cost[p]) ; 
+     }
+     for(ll  i  : tp)
+     {
+        string ja = arr[i] ;  
+        us.insert({ja , mina}) ; 
+     }
+     tp.clear() ;  
+  }
+   string  nw ;
+   ll ans = 0 ;   
+  for(int  i  = 0  ; i < m ; ++i)
+  {
+    cin>>nw ;  
+    ans += us[nw] ; 
+  }
+ cout<<ans ; 
+  
+  
+return 0 ;  }
