@@ -1,0 +1,26 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    int n,m;
+     cin>>n>>m;
+    int arr[m] ;
+    for( int k = 0 ; k < m ;++k)
+     {
+         cin>>arr[k];
+
+     }
+     sort(arr,arr+m) ;
+     int low = 1000;
+     for(int z = 0 ; z <= (m - n ); ++z)
+     {
+
+         if((arr[z+n-1] - arr[z]) < low )
+            low = arr[z+n-1] - arr[z] ;
+
+     }
+     cout<<low;
+    return 0;
+}
