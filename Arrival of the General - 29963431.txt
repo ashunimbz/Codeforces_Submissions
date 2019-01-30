@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <set>
+#include <map>
+#include <iomanip>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <queue>
+#define ll long long int
+#define MOD 1000000007
+#define IOS ios::sync_with_stdio(false)  ; cin.tie()  ; cout.tie()
+#define MAX 100001
+using namespace std;
+vector<int> arr[101] ;
+
+ int main(){
+      IOS  ;
+     int n ;
+     cin>>n ;
+     vector<int>vec ;
+     for(int i = 0 ;  i< n  ; ++i)
+     {
+         int v ;
+         cin>>v ;
+         vec.push_back(v);
+         arr[v].push_back(i);
+     }
+
+     int mina =  *min_element(vec.begin()   , vec.end()) ;
+     int maxa = *max_element(vec.begin()   , vec.end())  ;
+    // int swaps   = 0  ;
+     int first  = arr[maxa][0] - 0 ;
+     int second = n - 1 - arr[mina][arr[mina].size() -1] ;
+     bool flag   = 0 ;
+     if(arr[maxa][0] > arr[mina][arr[mina].size() -1])
+         flag = 1 ;
+     cout<<first + second  -flag <<"\n"  ;
+
+       return 0;
+}
