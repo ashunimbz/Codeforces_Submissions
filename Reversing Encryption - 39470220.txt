@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll   long long int 
+#define mod 1000000007
+#define inf  200000000000000
+#define eps  0.0000000000001
+using namespace std ;  
+vector<ll>divisors ;  
+string s ;
+ll n  ;
+
+void doo()
+{
+
+ for(int i  = s.length()  ;  i >= 1  ; --i)
+{
+   if(n % i == 0)
+    divisors.push_back(i) ; 
+}
+
+sort(divisors.begin() , divisors.end());
+  for(int i  = 0 ; i < divisors.size() ; ++i)
+  {
+     ll p  = divisors[i] ;
+     string extra = "" ;  
+     for(int  j  = 0 ;  j < p  ;++j)
+     {
+           extra += s[j] ; 
+     }
+     reverse(extra.begin() , extra.end()) ;  
+     for(int j  =  0 ; j  < p  ;++j)
+      s[j]   =extra[j] ; 
+  }
+}
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+    cin>>n ;  
+   cin>>s ;  
+   doo();
+   cout<<s;
+  
+
+return   0 ; }
