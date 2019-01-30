@@ -1,0 +1,67 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll    long long int 
+#define MOD 1000000007
+#define inf  2000000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+ll n  ;  
+pair<ll,ll> arr[100005] ;
+int DP[100005][2] ; 
+
+bool possi(ll cur ,ll previous)
+{
+    if(cur == n  )
+      return true ;  
+    bool a = false  , b = false ;  
+     if(DP[cur][previous] != -1)
+      return DP[cur][previous] ;
+    if(cur == 0 )
+    {
+       a =  possi(cur + 1 ,  0) ;  
+       b =  possi(cur + 1 ,  1) ; 
+    }
+    else if(previous)
+    {
+       if(arr[cur].first <= arr[cur-1].second)
+       a =  possi(cur + 1 ,  0) ;   
+       if(arr[cur].second <= arr[cur-1].second)
+       b =  possi(cur + 1 ,  1) ;   
+    }
+    else
+    {
+           if(arr[cur].first <= arr[cur-1].first)
+       a =  possi(cur + 1 ,  0) ;   
+       if(arr[cur].second <= arr[cur-1].first)
+       b =  possi(cur + 1 ,  1) ;   
+    }
+    bool ans = a|b ; 
+    return ( DP[cur][previous]  = ans  )  ;  
+}  
+
+int main()
+{
+
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+   cin>>n ;   
+   for(ll i  = 0 ; i < n  ; ++i)
+    cin>>arr[i].first>>arr[i].second ; 
+  for(ll i  = 0 ; i < 100005 ; ++i)
+    for(ll  j = 0 ;  j< 2 ; ++j)
+      DP[i][j]  = -1 ; 
+    if(possi(0 ,  0))
+    cout<<"YES\n" ;  
+    else
+    cout<<"NO\n"; 
+  
+   return   0  ;
+ }
