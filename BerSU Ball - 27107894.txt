@@ -1,0 +1,76 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+
+
+
+
+int main()
+{
+    int n,m ;
+    cin>>n;
+    int arr1[n];
+for(int i = 0 ; i < n ; ++i)cin>>arr1[i];
+cin>>m;
+int arr2[m];
+for(int j =  0 ;  j < m ; ++j)cin>>arr2[j];
+
+sort(arr1,arr1+n);
+sort(arr2,arr2+m);
+int ans = 0 ;
+if(n> m)
+{
+int i = 0 ;
+int j = 0;
+while( j < min (n,m))
+   {
+     if(abs(arr1[i] - arr2[j]) <= 1)
+       {
+           ans++;
+           i++;
+           j++;
+       }
+
+    else{
+          if(arr2[j] > arr1[i])
+            i++;
+
+          else
+            j++;
+
+        }
+
+   }
+}
+else
+{
+  int i = 0 ;
+int j = 0;
+while( i < min (n,m))
+   {
+     if(abs(arr1[i] - arr2[j]) <= 1)
+       {
+           ans++;
+           i++;
+           j++;
+       }
+
+    else{
+          if(arr2[j] > arr1[i])
+            i++;
+
+          else
+            j++;
+
+        }
+
+   }  
+    
+    
+    
+}
+   cout<<ans<<"\n";
+       return 0;
+}
