@@ -1,0 +1,45 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll    long long int 
+#define MOD 1000000007
+#define inf  2000000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+
+
+ 
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+   ll n ,m  ;cin>>n>>m ;  
+   ll arr[n] ;  
+   ll price[m] ; 
+   for(ll i = 0  ; i< n ; ++i)cin>>arr[i] ;  
+   for(ll   i = 0 ;  i < m  ;++i)cin>>price[i] ; 
+   ll ans = 0 ;  
+   ll cur =  0 ;   
+    for(int  i =  0 ; i < n ; ++i)
+    {
+       if(cur >= m)
+        break ;
+         if(price[cur] >= arr[i])
+         {
+           cur++; 
+           ans++ ;  
+         }
+    }
+
+     cout<<ans ;
+   return   0  ;
+
+}
+ 
