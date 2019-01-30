@@ -1,0 +1,70 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <utility>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int 
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie()  
+#define MOD  1000000007  
+
+
+
+int main()
+{
+   IOS ;
+   int n  ;
+   cin>>n ; 
+   char cur1  ; 
+   char curs  = '3' ; 
+   char cur2  ; 
+   bool ans = true ; 
+char v ; 
+   for(int i =  0 ;  i < n  ;++i)
+   {
+   	 cin>>v ;
+   	 
+   	 if(v == curs)
+   	 {
+
+   	 	ans = false; 
+   	 } 
+   	 if(i == 0)
+   	 	{
+   	 		cur1  = v ; 
+             if(cur1 == '1')
+             curs = '2' ; 
+             else
+             	curs = '1'  ;
+             
+           cur2  ='3'  ;
+          // cout<<cur1<<" "<<cur2<<"\n"  ;
+           continue   ;
+    	}
+
+    	if(v == cur1)
+    	{
+    		swap(cur2,curs);
+    	}
+    	else
+    	{
+    		 swap(cur1,curs) ;
+    	}
+    	//cout<<cur1<<" "<<cur2<<"\n"  ;
+
+
+ }
+   if(ans)
+   	cout<<"YES\n" ; 
+   else
+   	cout<<"NO\n" ; 
+
+return 0  ;}
