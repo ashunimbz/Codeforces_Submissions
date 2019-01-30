@@ -1,0 +1,65 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <map>
+#include <set>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <numeric>
+#include <string>
+#include <set>
+#include <cmath>
+#define ll  long long int
+using namespace std;
+bool ans = false ;
+string uans  ;
+ll length ;
+
+void rec(ll a , ll b ,string s, ll len)
+{
+    if(a > b )
+    {
+        return  ;
+    }
+    if(a == b)
+    {
+        ans = true ;
+        uans = s ;
+        length = len ;
+        return  ;
+    }
+
+
+   rec(2*a ,  b   , s +" "+to_string(2*a),len + 1) ;
+   rec( a*10 + 1 ,  b   , s +" "+to_string(a*10 + 1),len+1) ;
+
+}
+
+
+
+int main()
+{
+    ios::sync_with_stdio(false);cin.tie(0);
+    ll a , b ;
+    cin>>a>>b ;
+
+    rec(a ,  b,to_string(a) ,1) ;
+
+    if(ans)
+    {
+
+        cout<<"YES\n" ;
+        cout<<length<<"\n" ;
+        cout<<uans ;
+    }
+    else
+        cout<<"NO";
+
+
+
+
+
+
+return 0 ;}
