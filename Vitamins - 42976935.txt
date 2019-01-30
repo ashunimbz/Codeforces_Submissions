@@ -1,0 +1,73 @@
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#include <cstdio>
+#define ll   long long int
+#define MOD 1000000007
+#define inf  20000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+ll n  ; 
+ll DP[1001][2][2][2] ; 
+vector< pair<ll ,string > >arr ;
+
+ll rec(ll cur , ll one  , ll two , ll three)
+{
+   if(cur == n )
+   {
+      if( (one  && two ) && (two && three) ) 
+        return 0 ;  
+      return inf ;  
+   }
+   if(DP[cur][one][two][three] != -1)
+    return DP[cur][one][two][three]  ; 
+  string jo  = arr[cur].second ;
+  bool ones = one  , twos =  two  ,threes =  three;   
+  for(int i   =  0 ; i < (ll)jo.length() ;   ++i)
+    {
+        if(jo[i] == 'A')
+          ones = true ;  
+        if(jo[i] == 'B')
+          twos =  true ;  
+        if(jo[i] == 'C')
+          threes  = true ; 
+    }
+    ll a =  rec(cur + 1 ,  ones , twos  ,threes) + arr[cur].first ;  
+    ll b =  rec(cur + 1 , one  ,two  ,three) ;  
+    return DP[cur][one][two][three] =   min(a  ,b)  ;  
+}  
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;
+  cin>>n ; 
+  for(ll i  =  0 ; i  < 1001 ; ++i)
+  {
+     for(ll j  = 0 ;  j < 2 ; ++j)
+      for(ll k  = 0 ; k < 2 ; ++k)
+        for(ll m =  0 ;  m < 2 ; ++m)
+          DP[i][j][k][m]  = -1 ; 
+  }
+  for(ll i = 0  ; i < n ; ++i)
+  {
+     ll v ;  
+     cin>>v ; 
+     string s ; 
+     cin>>s ;  
+     arr.push_back({v ,s}) ;  
+  }
+  if(rec(0 ,  0,0,0) >= inf)
+    cout<<-1 ;  
+  else
+  cout<<rec(0 ,  0,0,0); 
+return  0 ; 
+} 
