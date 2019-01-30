@@ -1,0 +1,76 @@
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll    long long int 
+#define MOD 1000000007
+#define inf  2000000000
+#define eps  0.0000000000001
+using namespace std ; 
+ll ans  = 0 ; 
+map < char , char> par  ; 
+map<char , ll>size ;  
+vector< pair<char , char > >vec ;  
+
+char root(char a)
+{
+    while( par[a] != a )
+    {
+       par[a] =  par[par[a]] ; 
+       a = par[a] ; 
+    }
+    return a ;  
+}
+
+void Union(char a  ,char  b)
+{
+   char root1 =  root(a) ;  
+   char root2  = root(b) ;  
+   if(root1 == root2)
+    return  ; 
+    ans++ ;  
+    vec.push_back({a , b}) ; 
+    if(size[root1] < size[root2])
+    {
+       par[root1]  = root2 ;  
+       size[root2] += size[root1] ; 
+    } 
+    else
+    {
+       par[root2] = root1 ;  
+       size[root1] += size[root2] ; 
+    }
+}
+
+
+
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+   for(int i  =  'a'  ;  i <= 'z' ; ++i)
+   {
+     par[(char)i] = (char)i ;  
+   }
+   ll  n ;cin>>n ;  
+   string a , b ; cin>>a>>b ;  
+ for(ll  i  = 0  ; i< n  ;++i)
+ {
+   if(a[i] != b[i])
+    Union(a[i] , b[i]) ; 
+
+ }
+ cout<<ans<<'\n' ;  
+ for(auto jo : vec)
+  cout<<jo.first<<" "<<jo.second<<'\n' ;
+   return   0  ;
+ 
+ }
