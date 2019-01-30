@@ -1,0 +1,130 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <utility>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll int 
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie()  
+#define MOD  1000000007 
+ 
+ll arr[200001] ; 
+vector< pair<ll,ll> > seg[800005]  ; 
+ll n ; 
+
+bool compare(pair<ll ,ll > &a, pair<ll , ll> &b){
+    return a.first<b.first;
+}
+
+void mergethem(int lchild , int rchild , int par)
+{
+	  int l =  0 ; 
+	  int r =  0 ;
+	  
+	  while(l  < seg[lchild].size() && r < seg[rchild].size())
+	  {
+	  	 if(seg[lchild][l] < seg[rchild][r])
+	  	 	{
+	  	 		seg[par].push_back(seg[lchild][l]) ; 
+	  	 		l++ ;
+	  	 	}
+	  	 	else
+	  	 	{
+	  	 		 seg[par].push_back(seg[rchild][r]) ; 
+	  	 		r++ ;
+	  	 	}
+           
+	  }
+	  while( l < seg[lchild].size())
+	  {
+	  	seg[par].push_back(seg[lchild][l]) ; 
+	  	 		l++ ;
+	  }
+	  while( r < seg[rchild].size())
+	  {
+	  	seg[par].push_back(seg[rchild][r]) ; 
+	  	 		r++ ;
+	  }
+
+}
+void build(ll node  , ll start , ll endd)
+{
+     
+     if(start  == endd)
+     {
+        seg[node].push_back( {arr[start] ,start } )  ; 
+        return  ; 
+     }
+     int mid = (start  +endd)/2 ; 
+     build(2*node + 1   ,start , mid)  ;
+     build(2*node + 2  ,mid + 1  ,endd)  ; 
+ 
+    
+     //sort(seg[node].begin()   ,seg[node].end()) ; 
+     mergethem(2*node + 1, 2*node + 2 , node) ; 
+ 
+}
+ 
+ 
+ll query(ll node , ll start  ,ll endd  , ll l , ll r , ll k)
+{
+     if(start > r ||  endd < l  )
+      return -1 ;
+     ll ans  = -1 ; 
+     int xoxo ; 
+    if(start >= l && endd <= r)
+    {
+        auto c  = upper_bound(seg[node].begin() , seg[node].end() , make_pair(k,xoxo) , [](pair<ll,ll>a , pair<ll,ll>b){
+            return a.first < b.first ; 
+        } );
+        if(c != seg[node].end())
+        	ans = (*c).second + 1 ; 
+        auto io = lower_bound(seg[node].begin() , seg[node].end() ,make_pair(k ,xoxo) , [](pair<ll,ll>a , pair<ll,ll>b){
+            return a.first < b.first ; 
+        }) ;
+        if(io != seg[node].begin())
+        {
+        	 --io ;
+        	 ans  = max(ans  ,(*io).second + 1 ) ;
+        }
+        //cout<<" l = "<<start<<" r = "<<endd<<" = "<<ans<<'\n' ; 
+        return ans ; 
+         
+    }
+     int mid = (start + endd)/2 ; 
+    return max( query(2*node + 1  , start ,mid , l , r,k)  
+     , query(2*node + 2  , mid + 1 ,endd, l , r,k)  ) ;
+}
+ 
+ 
+ 
+ 
+int main(){
+  
+  int q ; 
+  scanf("%d%d",&n,&q) ;  
+  for(int i = 0 ; i < n ; ++i)
+  scanf("%d",&arr[i]) ; 
+build(0  , 0,n-1) ; 
+while(q)
+{
+ 
+  int l , r, k  ;
+  scanf("%d%d%d",&l,&r,&k)  ;
+  printf("%d\n",query(0 , 0 ,n-1 ,l-1 , r-1, k)) ;
+  
+ 
+q-- ; }
+  
+ 
+  
+return   0 ;
+}  
