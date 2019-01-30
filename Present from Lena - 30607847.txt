@@ -1,0 +1,66 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie() ;  
+
+int main()
+{
+  int  n ; 
+  cin>>n  ; 
+
+  string arr[n+1]  ; 
+  for(int i  = 0  ; i <= n  ;++i)
+  {
+     string arr1  =  "" ; 
+      for(int j =  0 ;  j  <  ( (2*n+1 + 2*n) - (2*i + 1 + 2*i ))/2 ; ++j )
+       {
+        cout<<" " ;
+        arr1 += " " ; 
+       }
+      
+      for(int j =   0  ;  j < 2*i + 1  ; ++j)
+      {
+         if(j > i )
+          {
+             arr1 += to_string(i  - (j - i)) ;
+             
+             if(j == 2*i)
+              cout<<i  - (j - i) ; 
+            else
+             {
+              arr1 += " " ; 
+              cout<<i  - (j - i)<<" " ;
+             }
+           }
+        else{
+          arr1 += to_string(j) ;  
+          //arr1+=  " " ; 
+          if(j == 2*i)
+          cout<<j  ;
+          else
+           { cout<<j<<" " ;
+             arr1 += " "  ; 
+             }   
+             }
+        }
+      arr[i]  = arr1 ; 
+      cout<<"\n" ; 
+  }
+  for(int i  =  n-1  ;  i>= 0  ; --i)
+  {
+     cout<<arr[i]<<"\n"  ; 
+  }
+return  0 ;  
+}
+  
