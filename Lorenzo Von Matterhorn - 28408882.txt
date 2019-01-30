@@ -1,0 +1,89 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <map>
+#include <set>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <numeric>
+#include <string>
+#include <set>
+#include <cmath>
+#include <stack>
+#include <cctype>
+#define MOD 1000000007
+#define ll  long long int
+using namespace std;
+unordered_map<ll , ll>mp;
+
+void lcs(ll u , ll v ,ll w )
+{
+
+    while(u != v)
+    {
+
+        if(u < v)
+        swap(u,v) ;
+
+        mp[u] += w ;
+        u /=2 ;
+
+    }
+
+
+}
+
+ll lcs1(ll u , ll v)
+{
+    ll ans = 0 ;
+    while(u != v)
+    {
+
+        if(u < v)
+            swap(u,v) ;
+
+        ans += mp[u] ;
+        u = u/2 ;
+
+    }
+    return ans ;
+
+}
+
+
+ int main(){
+
+ ll q ;
+ cin>>q ;
+ while(q)
+ {
+     ll a ;
+     cin>>a ;
+
+     if(a == 1)
+     {
+         ll b ,c ,d ;
+         cin>>b>>c>>d ;
+          lcs(b,c,d) ;
+
+
+
+
+     }
+
+     else
+     {
+         ll b , c ;
+         cin>>b>>c ;
+         cout<<lcs1(b,c)<<"\n" ;
+     }
+
+
+
+ q-- ;}
+
+
+return 0
+;}
