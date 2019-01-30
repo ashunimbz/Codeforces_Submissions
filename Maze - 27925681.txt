@@ -1,0 +1,156 @@
+import java.util.* ;
+import java.io.* ;
+
+
+public class be {
+    static class FastReader
+    {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public FastReader()
+        {
+            br = new BufferedReader(new
+                    InputStreamReader(System.in));
+        }
+
+        String next()
+        {
+            while (st == null || !st.hasMoreElements())
+            {
+                try
+                {
+                    st = new StringTokenizer(br.readLine());
+                }
+                catch (IOException  e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt()
+        {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong()
+        {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble()
+        {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine()
+        {
+            String str = "";
+            try
+            {
+                str = br.readLine();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            return str;
+        }
+    }
+
+    static  int my = 0 ;
+
+  static void   dfs(char[][] arr , boolean[][] visited , int i ,int j ,int n, int m ,int tot ,int k)
+    {
+
+        if(i >= n || j >= m || i < 0 || j < 0)
+            return  ;
+
+        if(arr[i][j] == 'X' || arr[i][j] == '#')
+            return  ;
+        if(visited[i][j] == true)
+            return  ;
+
+        if(my == tot  -  k )
+            return;
+
+        //System.out.println(i + " " + j);
+        visited[i][j] = true ;
+        my++ ;
+
+
+
+        dfs(arr,visited,i+1,j,n,m,tot,k);
+        dfs(arr,visited,i-1,j,n,m,tot,k) ;
+       // dfs(arr,visited,i+1,j+1,n,m,tot,k) ;
+       // dfs(arr,visited,i-1,j-1,n,m,tot,k) ;
+        dfs(arr,visited,i,j+1,n,m,tot,k) ;
+        dfs(arr,visited,i,j-1,n,m,tot,k);
+        //dfs(arr,visited,i+1,j-1,n,m,tot,k) ;
+       // dfs(arr,visited,i-1,j+1,n,m,tot,k) ;
+
+
+
+    }
+
+
+
+    public  static  void main(String[] args)
+    {
+        FastReader sc = new FastReader() ;
+        int n = sc.nextInt() ;
+        int m = sc.nextInt() ;
+        int k  = sc.nextInt() ;
+        char[][] arr = new char[n][m] ;
+        boolean[][] visi = new boolean[n][m] ;
+
+        for(int i = 0  ; i  < n ; ++i)
+        {
+            for(int j  = 0 ;  j  <m ; ++j)
+                visi[i][j] = false ;
+        }
+
+          int tot =  0 ;int x =  0 , y =  0 ;
+        for(int i = 0  ; i < n ; ++i)
+        {
+            String q = sc.next() ;
+            for(int j = 0  ;  j < q.length() ; ++j)
+            {
+                arr[i][j] = q.charAt(j) ;
+                if(arr[i][j] == '.')
+                { tot++ ;
+                x  = i ; y = j ; }
+
+            }
+        }
+        dfs(arr,visi,x,y,n,m,tot,k);
+
+        for(int i = 0 ; i < n ; ++i)
+        {
+            for(int j = 0 ;  j< m ; ++j)
+            {
+
+                if(arr[i][j] =='.' && visi[i][j] == false)
+                {
+                    arr[i][j] = 'X';
+                }
+            }
+        }
+
+        for(int i = 0  ; i <n ; ++i)
+        {
+            for(int j =  0 ;  j< m ; ++j)
+            {
+                 System.out.print(arr[i][j]);
+            }
+
+            System.out.println();
+        }
+
+
+
+    }
+
+}
