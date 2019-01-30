@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll  long long int
+#define mod 1000000007
+#define inf  20000000000
+#define eps  0.0000000000001
+using namespace std ;  
+
+ll modularExponentiation(ll x,ll n,ll M)
+{
+    if(n==0)
+        return 1;
+    else if(n%2 == 0)        //n is even
+        return modularExponentiation((x*x)%M,n/2,M);
+    else                             //n is odd
+        return (x*modularExponentiation((x*x)%M,(n-1)/2,M))%M;
+
+}
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+
+   ll x ,  k;cin>>x>>k ; 
+   
+   if(x == 0)
+   {
+
+     cout<<0 ; 
+     return 0 ; 
+   }
+
+  ll v   = modularExponentiation(2 ,k ,mod) ; 
+  ll next  = (2*x - 1)%mod  ;  
+  ll ans =   ( ( v % mod ) *(next % mod)  + 1) % mod ;  
+
+  cout<<ans ;
+return   0 ; }
