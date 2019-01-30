@@ -1,0 +1,75 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int 
+#define mod 1000000007
+#define inf  100000000000
+using namespace std ;  
+
+
+
+
+int main()
+{
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+  ll n  ; cin>>n ; 
+  pair<ll,ll> chem[n] ;  
+  unordered_map<ll,ll>um1 ;
+    unordered_map<ll,ll>um2 ;
+  for(int  i  = 0 ; i < n ; ++i)
+  {
+     ll  a , b ; cin>>a>>b ;
+     um1[a]  =   b ;   
+    chem[i]   =  {a , b}  ; 
+  }
+  ll m ; cin>>m ;   
+  pair<ll,ll> top[m] ;  
+    for(int  i  = 0 ; i < m ; ++i)
+  {
+
+     ll  a , b ; cin>>a>>b ; 
+     um2[a]   = b ;  
+    top[i]   =  {a , b}  ; 
+  }
+
+ll ans = 0 ;  
+  
+ for(int i  =  0 ;  i < n ;  ++i)
+ {
+    ll ind1 =  chem[i].first ;  
+    ll val  = chem[i].second ;  
+    if(um2.find(ind1) == um2.end())
+    ans+= val ;   
+ }
+
+ for(int i  =  0 ;  i < m ;  ++i)
+ {
+    ll ind1 =  top[i].first ;  
+    ll val  = top[i].second ;  
+    if(um1.find(ind1) == um1.end())
+    ans+= val ;   
+ }
+
+for(int i  = 0 ; i < n ; ++i)
+{
+    ll ind1 =  chem[i].first ;  
+    ll val  = chem[i].second ;  
+    if(um2.find(ind1) != um2.end())
+    {
+        ll val1 = um2[ind1] ;  
+        ans += max(val1  ,val)  ; 
+    }
+
+}
+
+ cout<<ans ;
+
+
+return  0 ;  }
