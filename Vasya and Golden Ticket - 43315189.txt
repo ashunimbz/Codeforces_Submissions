@@ -1,0 +1,95 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#include <cstdio>
+#define ll   long long int
+#define MOD 1000000007
+#define inf  20000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+ll   n ; 
+string s ;  
+
+bool DP[101][901][101] ; 
+bool visited[101][901][101] ; 
+ll prefix[101] ;  
+
+
+bool  rec(ll cur,ll sum ,ll last)
+{
+   if(cur == n)
+   {
+    ll loc  ;  
+    if(last == 0 )
+      loc = prefix[cur-1] ;  
+    else
+      loc = prefix[cur-1]  -  prefix[last - 1] ;  
+     if(loc == sum)
+      return true ; 
+    return false ; 
+   }
+   if( visited[cur][sum][last] )  
+   return    DP[cur][sum][last]  ; 
+
+   if(cur == 0  )
+    return rec(cur + 1  , sum  ,  last) ;  
+
+
+
+       ll loc  ;  
+    if(last == 0 )
+      loc = prefix[cur-1] ;  
+    else
+      loc = prefix[cur-1]  -  prefix[last - 1] ;  
+    bool a = false  ,b = false ; 
+    if(sum == 0 )
+      { 
+        a =  rec(cur + 1 ,  loc , cur)   ;
+        b = rec(cur + 1 ,  sum , last) ;  
+       }
+     else 
+     {
+          b = rec(cur + 1 ,  sum , last) ; 
+
+          if(loc == sum)
+          {
+             a = rec(cur + 1 ,  loc , cur)   ;
+          }
+     } 
+
+   visited[cur][sum][last]  = true ;    
+  bool ans =  (a |b)  ;  
+  DP[cur][sum][last]  =ans  ;  
+  return ans  ;
+
+}
+
+
+int main()
+{
+  ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;  
+  cin>>n ;  
+  cin>>s ;  
+  prefix[0] = s[0] - '0' ;
+  for(ll   i  =1 ; i  < n  ;++i)
+     prefix[i]  =  prefix[i-1] + s[i] -'0' ; 
+   prefix[n]  =  prefix[n-1] ; 
+  for(ll i  = 0 ; i < 101 ; ++i)
+    for(ll  j  = 0 ;  j < 901 ;  ++j)
+      for(ll k  = 0  ; k < 101 ; ++k)
+        visited[i][j][k]  = false ;  
+   if(rec(0,0,0))
+    cout<<"YES" ; 
+  else
+    cout<<"NO" ;
+
+ return  0  ;  
+} 
