@@ -1,0 +1,37 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int dp(int arr[] ,int l )
+ {
+     int table[l] ;
+     for(int z = 0  ; z < l ; ++z)table[z] = 1 ;
+
+     for(int z = 1 ; z < l ; ++z)
+     {
+        if(arr[z] >=  arr[z-1]  )
+        table[z] = table[z-1] + 1 ;
+
+     }
+     int maxa= 0 ;
+
+    for(int a = 0 ; a < l; ++a)
+    {
+        if(table[a] > maxa)
+            maxa = table[a];
+    }
+    return maxa;
+ }
+
+
+int main()
+{
+    int n ;
+    cin>>n;
+    int arr[n];
+    for(int z = 0 ; z < n ; ++z)cin>>arr[z];
+
+    cout<<dp(arr,n);
+
+    return 0;
+}
