@@ -1,0 +1,67 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <map>
+#include <set>
+#include <cmath>
+#include <iomanip>
+#include <climits>
+#include <stack>
+#define ll long long int
+#define MOD 1000000007
+#define eps 0.001
+using namespace std ;
+
+
+
+int main()
+{
+ios::sync_with_stdio(0) ;cin.tie() ;
+cout.tie() ;
+ll k  ;
+cin>>k ;
+int arr[10] ;
+fill(arr, arr + 10 , 0) ;
+string s ;
+cin>>s ;
+ll sum = 0 ;
+for(int i = 0  ; i < s.length();  ++i)
+{
+  arr[s[i] -'0']++ ;
+  sum += s[i] - '0' ;
+
+}
+if(sum >= k ){
+cout<<0 ;
+return 0 ;
+}
+int ans = 0 ;
+ll dif = k  - sum ;
+
+for(int j  = 0 ; j <=  9  ; ++j)
+{
+    if(arr[j] == 0)
+    continue ;
+  else if(arr[j]*(9-j) >= dif)
+   {
+    ans += ( dif + (9-j) - 1 ) /( 9-j ) ;
+
+
+   break ;}
+   else
+   {
+   ll ndif = arr[j] * (9 - j) ;
+   ans += arr[j] ;
+   dif -= ndif ;
+
+   }
+
+
+}
+cout<<ans ;
+
+return  0 ;
+}
