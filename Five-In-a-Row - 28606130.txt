@@ -1,0 +1,185 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <map>
+#include <set>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <numeric>
+#include <string>
+#include <set>
+#include <cmath>
+#include <stack>
+#include <cctype>
+#define MOD 1000000007
+#define ll  long long int
+using namespace std;
+int c = 0 ;
+char arr[10][10] ;
+bool visited[10][10] ;
+
+void doit(){
+ for(int i  = 0 ; i < 10 ; ++i)
+       {
+         for(int j  = 0 ; j < 10 ; ++j)
+        visited[i][j] = false ;
+         }
+
+}
+
+void vertical(int x ,int y,int start)
+{
+     if(x < 0 || y < 0 || x >=10 || y >= 10)
+        return  ;
+    if(visited[x][y] && start)
+        return   ;
+
+ if(start != 0)
+  {
+    if(arr[x][y] != 'X')
+        return  ;}
+  visited[x][y]  = true ;
+  c++ ;
+  vertical(x + 1,y ,1) ;
+  vertical(x - 1 ,y,1) ;
+
+}
+void horizontal(int x ,int y,int start)
+{
+     if(x < 0 || y < 0 || x >=10 || y >= 10)
+        return  ;
+    if(visited[x][y] && start)
+        return   ;
+
+ if(start != 0)
+  {
+    if(arr[x][y] != 'X')
+        return  ;}
+  visited[x][y]  = true ;
+  c++ ;
+  horizontal(x ,y - 1,1) ;
+  horizontal(x  ,y + 1,1) ;
+
+}
+void slant1(int x ,int y,int start)
+{
+     if(x < 0 || y < 0 || x >=10 || y >= 10)
+        return  ;
+    if(visited[x][y] && start)
+        return   ;
+
+ if(start != 0)
+  {
+    if(arr[x][y] != 'X')
+        return  ;}
+  visited[x][y]  = true ;
+  c++ ;
+  slant1(x + 1,y+1 ,1) ;
+  slant1(x -1  ,y-1,1) ;
+
+}
+void slant2(int x ,int y,int start)
+{
+     if(x < 0 || y < 0 || x >=10 || y >= 10)
+        return  ;
+    if(visited[x][y] && start)
+        return   ;
+
+ if(start != 0)
+  {
+    if(arr[x][y] != 'X')
+        return  ;}
+  visited[x][y]  = true ;
+  c++ ;
+  slant2(x + 1,y-1 ,1) ;
+  slant2(x -1 ,y+1,1) ;
+
+}
+
+
+
+
+
+
+
+int main()
+{
+
+
+for(int i  = 0 ; i < 10 ; ++i)
+{
+
+    for(int j = 0  ; j< 10 ; ++j)
+    {
+        cin>>arr[i][j] ;
+    }
+}
+
+
+
+for(int i  = 0 ; i < 10 ; ++i)
+{
+    for(int j  = 0 ; j < 10 ; ++j)
+        visited[i][j] = false ;
+}
+
+for(int i  = 0 ;  i < 10 ; ++i)
+{
+    for(int j  = 0 ; j < 10 ; ++j)
+    {
+        if(arr[i][j] == '.')
+        {
+            doit() ;
+            bool chk = false;
+            c =  0  ;
+           
+        horizontal(i ,j,  0 );
+        
+        if(c >= 5)
+            chk  =true;
+            doit() ;
+
+        c = 0 ;
+        vertical(i,j,0) ;
+         if(c >= 5)
+            chk  =true;
+            doit() ;
+
+        c= 0 ;
+        slant1(i,j,0) ;
+         if(c >= 5)
+            chk  =true;
+            doit() ;
+
+        c = 0  ;
+        slant2(i,j,0) ;
+         if(c >= 5)
+            chk  =true;
+            doit() ;
+
+        c = 0 ;
+          if(chk)
+            {
+
+                cout<<"YES" ;
+                return 0 ;
+            }
+
+        }
+
+
+
+
+
+
+    }
+}
+
+
+
+cout<<"NO";
+
+return 0
+;}
