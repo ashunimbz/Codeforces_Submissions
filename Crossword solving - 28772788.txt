@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int
+
+using namespace std;
+
+int main()
+{
+      int n ,q ;
+      cin>>n>>q ;
+      string s  , m ;
+      cin>>s>>m;
+      int mini = 10001 ;
+
+      for(int i  = 0  ; i <= q -  n ; ++i)
+      {
+      int c=  0 ;
+         for(int j =  0 ; j < n ; ++j)
+         {
+            if(s[j] == m[j+i])
+            continue ;
+            else
+            ++c ;
+
+         }
+         mini = min(mini ,c) ;
+      }
+
+      vector<int>v ;
+
+        for(int i  = 0  ; i <= q -  n ; ++i)
+      {
+      int c=  0 ;
+         for(int j =  0 ; j < n ; ++j)
+         {
+            if(s[j] == m[j+i])
+            continue ;
+            else
+           {++c ;
+           v.push_back(j +  1) ;
+            }
+          }
+         if(c == mini)
+         {
+         break ;
+         }
+         v.clear()  ;
+      }
+
+      cout<<mini <<"\n";
+      for(int i :v)
+      cout<<i<<" " ;
+
+    return 0;
+}
