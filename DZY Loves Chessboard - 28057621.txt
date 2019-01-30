@@ -1,0 +1,84 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <map>
+#include <set>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <numeric>
+#include <string>
+#include <set>
+#include <cmath>
+#define ll  long long int
+using namespace std;
+char arr[101][101] ;
+bool visited[101][101] ;
+
+void dfs(int i ,int j ,int n ,int  m,char cur)
+{
+    if(i < 0  || j  <0 || i >= n || j >=m)
+        return  ;
+    if(arr[i][j] == '-')
+        return  ;
+    if(arr[i][j] != '.')
+        return  ;
+
+
+
+    if(cur == 'B')
+   {
+        arr[i][j] = 'B' ;
+        dfs(i+1,j,n,m,'W') ;
+        dfs(i-1,j,n,m,'W') ;
+        dfs(i,j+1,n,m,'W') ;
+        dfs(i,j-1,n,m,'W') ;
+   }
+    else
+      {
+         arr[i][j] = 'W' ;
+         dfs(i+1,j,n,m,'B') ;
+        dfs(i-1,j,n,m,'B') ;
+        dfs(i,j+1,n,m,'B') ;
+        dfs(i,j-1,n,m,'B') ;
+       }
+
+}
+
+
+int main()
+{
+    ios::sync_with_stdio(false);cin.tie(0);
+    int n , m ;
+    cin>>n>>m ;
+
+    for(int i =  0 ; i < n ;++i)
+    {
+        for(int j = 0 ; j < m ;++j)
+            cin>>arr[i][j] ;
+    }
+
+        for(int i = 0 ;  i <n  ;++i)
+    {
+        for(int j = 0  ; j < m ;  ++j)
+        {
+            if(arr[i][j] == '.')
+            dfs(i,j,n,m,'B') ;
+        }
+
+    }
+
+
+    for(int i = 0 ;  i <n  ;++i)
+    {
+        for(int j = 0  ; j < m ;  ++j)
+        {
+            cout<<arr[i][j] ;
+        }
+        cout<<"\n" ;
+    }
+
+
+
+return 0 ;}
