@@ -1,0 +1,47 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <climits>
+#include <cmath>
+#include <stack>
+#include <string>
+using namespace std ;
+#define ll long long int
+#define IOS ios::sync_with_stdio(false)  ; cin.tie(0) ; cout.tie() ; 
+
+
+ 
+int main()
+{ 
+   
+ int n  ; 
+int x ; 
+cin>>n >>x ; 
+int arr[n]  ; 
+int table[101] ; 
+fill(table , table + 101  ,  0) ; 
+for(int i = 0   ; i  < n ; ++i)
+{
+   cin>>arr[i]; 
+   table[arr[i]]++ ; 
+}
+int ans = 0 ; 
+for(int i  = 0  ; i < x  ;++i)
+{
+   if(table[i] == 0 )
+    ans++;  
+}
+ 
+ if(table[x] != 0)
+  cout<<ans + 1 ; 
+else
+  cout<<ans ;  
+ 
+return  0 ;  
+}
+  
