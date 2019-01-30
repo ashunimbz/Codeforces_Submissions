@@ -1,0 +1,92 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll    long long int 
+#define MOD 1000000007
+#define inf  2000000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+ll n , m,w ;  
+vector<ll>adj[1005]  ; 
+ll weight[1005] ;
+ll beauties[1005] ; 
+bool visited[1005] ;  
+vector<ll> compo[1001] ; 
+ll comp = 0  ; 
+void dfs(ll  node )
+{
+  compo[comp].push_back(node) ; 
+  visited[node]  = true ; 
+  for(ll u : adj[node])
+  if(!visited[u])
+    dfs(u) ;  
+}
+ll DP[1001][1001] ; 
+
+ll rec(ll cur ,ll wei)
+{
+
+   if(wei > w)
+    return -inf ; 
+
+  if(cur == comp)
+    return 0 ; 
+
+  if(DP[cur][wei] != -1)
+    return DP[cur][wei] ; 
+  ll a = rec(cur + 1 , wei) ;  
+  ll b =  -inf ;  
+  ll total =  0 ;  
+  ll totalb = 0 ; 
+  for(ll   p  = 0  ;p < (ll)compo[cur].size(); ++p)
+   {
+    total += weight[compo[cur][p]]  ;
+    totalb += beauties[compo[cur][p]]  ;  
+    b = max(b , rec(cur + 1 , wei + weight[compo[cur][p]] ) + beauties[compo[cur][p]] );
+   }
+
+  ll c =  rec(cur + 1 ,  wei + total) + totalb ;  
+  return DP[cur][wei] = max(max(a , b) , c) ; 
+}
+
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+  cin>>n>>m>>w ; 
+  for(ll i   = 1 ; i <=  n ;++i)cin>>weight[i] ;  
+  for(ll i  = 1 ; i <=  n ;++i)cin>>beauties[i] ;  
+  
+  for(int i = 0  ; i < m ; ++i)
+  {
+     ll u  ,v ; cin>>u>>v ;  
+     adj[u].push_back(v);  
+     adj[v].push_back(u) ; 
+  }
+  for(int i = 1 ;  i <= n  ; ++i)
+  {
+    if(!visited[i])
+    {
+      dfs(i) ; 
+      comp++ ; 
+    }
+  }
+  
+
+  for(ll i =  0 ; i < 1001  ; ++i)
+    for(ll j = 0  ; j  <1001 ; ++j)
+      DP[i][j]  = -1 ; 
+  cout<<rec( 0  ,0 ) ; 
+  
+   return   0  ;
+
+}
+ 
