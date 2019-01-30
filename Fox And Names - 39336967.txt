@@ -1,0 +1,101 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll  long long int
+#define mod 1000000007
+#define inf  20000000000
+#define eps  0.0000000000001
+using namespace std ;  
+
+map< char    , vector <char >  >mp  ;  
+map<char , int>indegree ;
+
+
+void bfs()
+{
+
+   queue<char>q ;  
+   for(auto  i  = mp.begin() ;  i !=  mp.end()  ; ++i)
+   {
+        char cur  = (*i).first ;  
+        if(indegree[cur] == 0 )
+         q.push(cur) ; 
+   }
+ll num  = 0  ;
+vector<char>ans ;  
+   while(!q.empty())
+   {
+      char from =  q.front() ;
+      q.pop() ; 
+      ans.push_back(from) ;  
+      num++ ; 
+      for(auto  jo : mp[from])
+      {
+           if(--indegree[jo] == 0)
+           {
+                q.push(jo) ; 
+           }
+
+      }
+   }
+   if(num != mp.size())
+    cout<<"Impossible" ; 
+  else
+  {
+      for(int yo  = 'a'   ;  yo <= 'z'  ; ++yo)
+      {
+         char tada = (char)yo ;  
+         if(mp.find(tada) == mp.end() ) 
+          cout<<tada  ; 
+      }
+      for(int i  =  0 ;  i< ans.size() ; ++i)
+        cout<<ans[i] ; 
+  }
+}
+
+
+
+string arr[101] ; 
+int main()
+{
+ 
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0) ; 
+  ll n  ;cin>>n ; 
+  bool fans  = true ;  
+  for(int i  = 0  ; i < n ; ++i)
+  {
+      string s  ;cin>>s ;
+      arr[i]  = s ;  
+      bool  is = false ; 
+      if(i != 0)
+      {
+           for(int j  = 0 ;  j < (ll)min(arr[i-1].length()  , arr[i].length()) ;++j )
+           {
+              if(arr[i-1][j] != arr[i][j])
+              {   
+                     is =  true ; 
+                    mp[arr[i-1][j]].push_back(arr[i][j]) ; 
+                    indegree[arr[i][j]]++ ; 
+                    break ;
+              }
+           }
+           if(!is &&  ( arr[i-1].size() > arr[i].size()) ) 
+            fans  = false;  
+
+      }
+  }
+ 
+ if(!fans)
+  cout<<"Impossible" ;
+else
+ bfs() ;  
+
+ return   0 ;  
+ }
