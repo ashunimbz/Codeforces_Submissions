@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long double
+#define mod 1000000007
+#define inf  10000000000
+using namespace std ;  
+
+
+
+int main()
+{
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+  ll  n ,k  ;cin>>n>>k ;
+  set<ll>se ;   
+  map<ll , ll>mp ;  
+  for(int i  =  1 ; i<= n  ;++i)
+  {
+    ll v ;cin>>v ; 
+    se.insert(v) ;  
+    mp[v]   =  i  ; 
+  }
+  if(se.size() >= k )
+  { 
+    cout<<"YES\n";
+        int j   =  0 ;  
+    for(int i : se)
+      { 
+        j++ ; 
+        cout<<mp[i]<<" " ; 
+        if(j == k )
+          break ; }
+  }
+  else
+    cout<<"NO\n" ; 
+ 
+  return  0 ;  }
