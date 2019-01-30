@@ -1,0 +1,68 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <map>
+#include <set>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <numeric>
+#include <string>
+#include <set>
+#include <cmath>
+#include <stack>
+#include <cctype>
+#define MOD 1000000007
+#define ll  long long int
+using namespace std;
+
+
+
+int main()
+{
+   ios::sync_with_stdio(false) ;cin.tie(0) ;
+   cout.tie(0) ;
+
+   int n ; cin>>n ;
+   int arr[n] ;
+   bool inc = false ;
+   bool cons = false ;
+   bool dec = false;
+   bool ans = true ;
+   for(int i  = 0 ; i< n ; ++i)
+   {
+       cin>>arr[i] ;
+       if(i != 0 )
+       {
+           if(arr[i] > arr[i-1])
+           {
+               if(dec || cons)
+                {ans = false ;}
+
+               inc = true ;
+
+           }
+            else if(arr[i] == arr[i-1])
+           {
+               if(dec)
+                {ans = false ;}
+
+            cons= true ;
+
+           }
+           else
+           {
+               dec = true ;
+
+           }
+       }
+   }
+
+   if(ans)
+    cout<<"YES";
+   else
+    cout<<"NO" ;
+
+return 0
+;}
