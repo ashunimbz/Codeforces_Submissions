@@ -1,0 +1,68 @@
+#include <iostream>
+#include <algorithm>
+#include <set>
+#include <cmath>
+using namespace std;
+
+
+
+int main()
+{
+   ios::sync_with_stdio(false) ; cin.tie(0) ;
+   int n  ,m  ;cin>>n>>m ;
+   int arr[n] ;
+  int ans[m+1] ;
+   int freq[m+1] ;
+   fill(freq , freq + m + 1 ,0) ;
+   fill(ans , ans + m +1 , 0) ;
+   for(int i = 0  ;  i < n ; ++i)
+   {
+       cin>>arr[i] ;
+
+       if(arr[i] <= m)
+       {
+           freq[arr[i]]++ ;
+       }
+
+   }
+
+ for(int i =1 ; i <= m ; ++i)
+ {
+     for(int j = i  ;  j  <= m ;  j+=i)
+     {
+
+         ans[j] += freq[i] ;
+     }
+ }
+ int maxans =  0 ;
+ int lcm  =1 ;
+ for(int i =1 ;  i<= m  ; ++i)
+ {
+     if(ans[i] > maxans)
+     {
+         maxans = ans[i] ;
+         lcm = i ;
+     }
+ }
+
+ cout<<lcm<<" " <<maxans<<"\n" ;
+
+ multiset<int>fans ;
+
+ for(int i = 0 ; i < n ; ++i)
+ {
+
+     if(lcm % arr[i] == 0)
+     {
+            fans.insert(i+1) ;
+
+
+
+     }
+ }
+
+ for(int p : fans)
+    cout<<p<<" " ;
+
+    return 0;
+}
