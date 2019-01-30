@@ -1,0 +1,73 @@
+#include <iostream>
+#include <vector>
+#include <set>
+#include <map>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#define ll long long
+using namespace std;
+
+
+int main()
+{
+
+    int a, b,c ;
+    cin>>a>>b>>c ;
+    int min1 = 9999999;
+    int min2 = 9999999;
+    //int min3 = 0 ;
+    int k = b ;
+
+    while( 1)
+    {
+        set<int>s;
+      int i= ((k) / 50) % 475;
+    for(int j = 0 ; j< 25 ; ++j)
+  {
+      i= (i * 96 + 42) %475 ;
+      int ans =(26 + i);
+      s.insert(ans);
+  }
+
+       if(s.find(a) != s.end() && k >= c)
+         {
+
+           min1 = k - b ;
+           // cout<<min1<<"\n";
+           break;
+         }
+s.clear();
+   k = k + 50 ; }
+int y = b;
+bool trick =false ;
+while(y >= c){
+  
+        set<int>s2;
+      int ii= ((y) / 50) % 475;
+    for(int j = 0 ; j< 25 ; ++j)
+  {
+      ii= (ii * 96 + 42) %475 ;
+      int ans =(26 + ii);
+      s2.insert(ans);
+  }
+   if(c < b && s2.find(a) != s2.end())
+      { trick = true ;
+      break;}
+s2.clear() ;
+ y = y - 50 ;}
+       if(trick)
+        cout<<0;
+
+
+       else{
+    int fmin1 ;
+    if(min1 % 100 == 0)
+         fmin1 = min1 /100 ;
+    else
+        fmin1 = min1/100 + 1 ;
+
+   cout<<fmin1;
+       }
+    return 0;
+}
