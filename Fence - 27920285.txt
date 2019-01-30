@@ -1,0 +1,106 @@
+import java.util.* ;
+import java.io.* ;
+
+
+public class be {
+    static class FastReader
+    {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public FastReader()
+        {
+            br = new BufferedReader(new
+                    InputStreamReader(System.in));
+        }
+
+        String next()
+        {
+            while (st == null || !st.hasMoreElements())
+            {
+                try
+                {
+                    st = new StringTokenizer(br.readLine());
+                }
+                catch (IOException  e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt()
+        {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong()
+        {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble()
+        {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine()
+        {
+            String str = "";
+            try
+            {
+                str = br.readLine();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            return str;
+        }
+    }
+
+
+
+
+
+
+    public  static  void main(String[] args)
+    {
+        FastReader sc = new FastReader() ;
+        int n = sc.nextInt() ;
+        int k = sc.nextInt() ;
+        int[] arr =new int[n]  ;
+        for(int i =  0 ; i < n ; ++i)
+            arr[i] = sc.nextInt() ;
+
+        int[] pre = new int[n] ;
+        pre[0] = arr[0]   ;
+        for(int i =  1; i < n ; ++i)
+        {
+            pre[i] = pre[i-1] + arr[i] ;
+        }
+         if(arr.length <= k)
+         {
+             System.out.println(1);
+         }
+     else {
+             int mina = pre[k-1];
+             int minaind = 0;
+
+
+             for (int j = k; j < n; ++j) {
+
+                 if (pre[j] - pre[j - k] < mina) {
+                     mina = pre[j] - pre[j - k];
+                     minaind = j - k+1;
+                 }
+             }
+
+
+             System.out.println(minaind + 1);
+         }
+
+    }
+
+}
