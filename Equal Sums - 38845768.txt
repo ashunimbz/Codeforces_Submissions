@@ -1,0 +1,84 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll  long long int
+#define mod 1000000007
+#define inf  20000000000000000
+#define eps  0.0000000000001
+using namespace std ;  
+
+int main()
+{
+ 
+ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0); 
+ll k ; 
+cin>>k ;  
+
+vector<ll> arr[k] ;  
+
+ll sum[k] ; 
+for(int i  = 0  ; i <  k ; ++i)
+{
+
+   ll n  ;  
+   cin>>n ;  
+   ll su  = 0 ; 
+   for(int j  = 0  ; j <  n ;++j)
+   {
+    ll v ;cin>>v ;
+    su += v ;  
+    arr[i].push_back(v) ; 
+   }
+  sum[i]  = su ;  
+
+}
+ll a1   ,  a11 , a2  ,a22 ;  
+bool ans  = false ; 
+unordered_map<ll , pair< ll , ll > >um ; 
+for(int i  = 0  ; i <  k ; ++i)
+{
+    if(i != 0 ){
+    for(int j  = 0  ; j <  arr[i].size() ;++j)
+   {
+       if( um.find(sum[i]  - arr[i][j]) != um.end()  )
+       {
+           ans = true ; 
+           a1 = i + 1  ,a11 = j + 1 ;
+           a2 =  um[sum[i]  - arr[i][j]].first , a22 =  um[sum[i]  - arr[i][j]].second ;  
+           break ; 
+       }
+   }
+  
+   }
+    if(i != k -1)
+     for(int j  = 0  ; j <  arr[i].size() ;++j)
+   {
+      ll yo  = sum[i]  - arr[i][j]  ; 
+      um.insert({yo, { i + 1  ,  j + 1}}) ; 
+   }
+
+}
+if(ans)
+{
+   cout<<"YES\n" ;  
+   cout<<a1<<" "<<a11<<"\n" ; 
+   cout<<a2<<" "<<a22<<"\n" ; 
+}
+else
+{
+   cout<<"NO\n";
+}
+
+ 
+
+
+
+ return   0 ;  
+}
