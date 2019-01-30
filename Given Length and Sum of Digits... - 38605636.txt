@@ -1,0 +1,109 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int 
+#define mod 1000000007
+#define inf  100000000000
+using namespace std ;  
+ll m ,s ;
+
+string minans =  "0" ; 
+string maxans  ; 
+string DP1[102][902] ; 
+string DP2[102][902] ; 
+
+void doit()
+{
+     for(int i   = 0 ;  i < 102 ; ++i)
+     {
+         maxans += "9" ;  
+     }
+
+     for(int i   =  0 ; i < 102  ;++i)
+     {
+          for(int j   = 0 ;  j < 902 ; ++j)
+          {
+             DP1[i][j]   = "-5" ;    
+             DP2[i][j]   = "-5" ;   
+          }
+     }
+}
+
+
+string fmin(ll rem ,  ll sum)
+{
+   if(rem == 1)
+   {
+       if(sum >  9 )
+        return "-1" ; 
+       return to_string(sum) ; 
+   }
+   if(DP1[rem][sum] != "-5")
+    return DP1[rem][sum]  ;  
+
+   ll start  = 0  ;  
+   if(rem == m)
+    start = 1  ;  
+   string ans  = maxans; 
+  for(int i = start  ;  i <=  min((ll)9 ,sum)   ; ++i )
+  {
+    string tp = "" ;  
+    tp =  fmin(rem - 1,  sum  -i )    ; 
+    if( tp =="-1")
+        continue ;
+    tp = to_string(i) + tp   ;  
+        ans  =  min(ans ,  tp)  ;    
+   
+  }
+  if(ans == maxans)
+    return DP1[rem][sum] = "-1" ;  
+  return DP1[rem][sum] =   ans ; 
+}
+
+
+string fmax(ll rem ,  ll sum)
+{
+   if(rem == 1)
+   {
+       if(sum >  9 )
+        return "-1" ; 
+       return to_string(sum) ; 
+   }
+   if(DP2[rem][sum] != "-5")
+    return DP2[rem][sum]  ;  
+
+   ll start  = 0  ;  
+   if(rem == m)
+    start = 1  ;  
+   string ans  = "-1"; 
+  for(int i = start  ;  i <=  min((ll)9 ,sum)   ; ++i )
+  {
+    string tp = "" ;  
+    tp =  fmax(rem - 1,  sum  -i )    ; 
+    if(tp == "-1")
+        continue ;
+     tp = to_string(i) + tp   ;  
+    ans  =  max(ans ,  tp)  ;    
+  }
+  return DP2[rem][sum] =   ans ; 
+}
+
+
+int main()
+{
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+  doit() ;  
+  cin>>m>>s ;  
+  cout<< fmin(m ,s)<<" "<< fmax(m ,s)  ;
+ 
+ 
+ 
+
+return  0 ;  }
