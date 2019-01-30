@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <cmath>
+#include <iomanip>
+#define ll long long int
+
+using namespace std;
+
+
+
+
+int main()
+{
+   int n  , z ;
+   cin>>n>>z;
+   int arr[n] ;
+   for(int i  = 0 ; i < n ;++i)
+   {cin>>arr[i] ;}
+
+   int req=0 ;
+   string ans = to_string(arr[0]) + " " ;
+
+   for(int i=1 ; i < n;++i)
+   {
+     if(arr[i] + arr[i-1] >= z)
+     { ans +=to_string(arr[i]) + " ";
+     continue ;}
+
+     int k = z -(arr[i] + arr[i-1]) ;
+     req += k;
+     arr[i]+= k;
+     ans += to_string(arr[i]) + " ";
+   }
+  cout<<req<<"\n"<<ans;
+
+    return 0;
+}
