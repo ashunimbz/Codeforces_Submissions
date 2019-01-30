@@ -1,0 +1,27 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <limits.h>
+using namespace std;
+
+int main()
+{
+    int n,a,b,c ;
+    cin>>n>>a>>b>>c;
+    int abc[] = {a,b,c};
+    int DP[n+1]  ;
+    for(int k = 0; k <= n ; ++k)DP[k] = INT_MIN;
+    DP[0] =  0 ;
+     for(int i = 1 ; i <= n ; ++i)
+     {
+         for(int j = 0 ; j <=2 ; ++j )
+           {
+               if( i >= abc[j] && (DP[i-abc[j]]+ 1 > DP[i] )  )
+               DP[i] = DP[i-abc[j]]+ 1 ;
+
+           }
+          // cout<<DP[i];
+     }
+     cout<<DP[n];
+    return 0;
+}
