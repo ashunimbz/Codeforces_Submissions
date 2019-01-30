@@ -1,0 +1,85 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#include <cstdio>
+#define ll   long long int
+#define MOD 1000000007
+#define inf  20000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+
+ 
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;
+   ll n , h ; 
+   cin>>n>>h ;  
+   pair<ll ,ll > arr[n]  ; 
+   for(ll i  = 0 ; i < n ; ++i)
+   {
+    ll a , b; cin>>a>>b ;  
+    arr[i] =  {a , b} ;  
+   }
+   map<ll , ll>mp  ; 
+   map<ll,ll>dif ; 
+   ll diff =  0 ; 
+   for(ll i  = 1 ;  i < n  ; ++i)
+   {
+      ll fst =  arr[i].first ;  
+      diff += fst  -  arr[i-1].second ;  
+      mp.insert({diff  , i }) ;  
+      dif.insert({i  , diff }) ;
+   }
+  ll maxi =   -1 ; 
+  diff = 0  ;  
+  for(ll i  = 0 ;  i < n ;  ++i)
+  {
+       ll fst =  arr[i].first ;  
+        if(i != 0)
+       diff += fst  -  arr[i-1].second ; 
+       auto to  = mp.lower_bound(diff + h-1) ;  
+
+       if(to == mp.end() )
+       {
+         ll extra =  h - ( dif[n-1] - diff )  ; 
+         ll loc =  arr[n-1].second  - arr[i].first + extra  ;   
+         maxi  = max(maxi  , loc) ; 
+       }
+       else
+       {
+           if((*to).first == diff + h-1)
+           {
+             ll  loc = arr[(*to).second].second -  arr[i].first  + 1; 
+             maxi  = max(maxi  , loc) ;  
+           }
+           else
+           {
+              if(to == mp.begin())
+              {
+                 ll loc =  arr[i].second  - arr[i].first + h  ;   
+                 maxi  = max(maxi  , loc) ; 
+              }
+              else
+              {
+                 to-- ;  
+                 ll nw  =  (*to).first  ; 
+                 ll ind = (*to).second ;   
+                 ll extra =  h - (nw-diff )  ;  
+                 ll upto =  arr[ind].second + extra  ;  
+                 ll loc =  upto -  arr[i].first ;    
+                 maxi = max(maxi ,loc) ;
+              }
+           }
+       }
+  }
+ cout<<maxi  ;
+return  0 ; 
+} 
