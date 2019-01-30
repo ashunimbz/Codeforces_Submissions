@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+#define ll long long
+using namespace std;
+
+int main()
+{
+    int ans = 0 ;
+   string s ;
+   cin>>s ;
+
+
+   if(s.length() == 1)
+    ans = 1 ;
+   else
+   {
+       ll a = stoi(s);
+       ll c =1 ;
+       for(int j = 1 ; j <  s.length() ; ++j)
+          c *= 10 ;
+          c  *= (s[0] - '0'+1) ;
+       ans  = c -a ;
+   }
+   cout<<ans<<"\n" ;
+    return 0;
+}
