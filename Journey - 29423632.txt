@@ -1,0 +1,86 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <map>
+#include <set>
+#include <cmath>
+#include <iomanip>
+#include <climits>
+#include <stack>
+#define ll long long int
+#define MOD 1000000007
+#define eps 0.001 ;
+
+
+using namespace std ;
+  vector<int>adj[100001] ;
+   double ans   =  0  ;
+
+
+
+void rec(int parent ,int cur ,int length  , double probab)
+{
+
+
+
+    if(adj[cur].size() == 1 && cur != 1)
+    {
+
+       ans += probab * length ;
+       return ;
+    }
+
+
+    for(int i =  0 ; i < adj[cur].size()  ;  ++i )
+    {
+
+        if(adj[cur][i] != parent ){
+
+          if(cur == 1)
+         rec(cur , adj[cur][i] ,  length + 1 ,  probab/(adj[cur].size() ))  ;
+
+        else
+        rec(cur , adj[cur][i] ,  length + 1 ,  probab/(adj[cur].size()  -1))  ;
+
+        }
+
+    }
+
+
+
+}
+
+
+
+int main()
+{
+
+  int n ;
+  cin>>n ;
+
+    cout<<fixed ;
+    cout<<setprecision(10) ;
+
+
+  for(int i = 0 ;  i <  n - 1; ++i)
+  {
+     int  u   ,v ;
+     cin>>u>>v ;
+
+    adj[u].push_back(v)  ;
+    adj[v].push_back(u)  ;
+  }
+  if(n == 1)
+  {
+    cout<<0;
+    return 0 ;
+  }
+
+  rec(-1 , 1  , 0,1)  ;
+cout<<ans;
+
+return  0 ;
+}
