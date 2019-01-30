@@ -1,0 +1,44 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<map>
+#include<set>
+#include<algorithm>
+#define ll long long int 
+using namespace std;
+int main()
+{
+	int n; cin >> n;
+	set<int>s;
+	int value; 
+	int counter = n;
+	for (int i = 1; i <= n; ++i)
+	{
+		cin >> value;
+		s.insert(value);
+		auto z = s.find(counter);
+		if (z != s.end())
+		{
+			while (z != s.end()) {
+				cout << *z<<" ";
+				s.erase(counter);
+				counter--;
+				z = s.find(counter);
+			}
+			cout << "\n";
+		}
+		else {
+			cout << "\n";
+			continue;
+		}
+
+
+	}
+
+	
+	
+
+
+	
+    return 0;
+}
