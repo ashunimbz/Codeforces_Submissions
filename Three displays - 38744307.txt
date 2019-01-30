@@ -1,0 +1,79 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll  long long int
+#define mod 1000000007
+#define inf  20000000000000000
+#define eps  0.0000000000001
+using namespace std ;  
+ll s ; 
+ll arr[3001] ; 
+ll cost[3001] ; 
+ vector<ll> ar[3001] ;  
+ll DP[3001][4]; 
+ll rec(ll cur ,ll taken)
+{
+
+   if(cur == s)
+    { 
+      if(taken == 3)
+        return    0 ;  
+      return  inf ;
+    }
+   if(taken > 3)
+    return  inf ; 
+   if(taken == 3)
+    return  0  ; 
+  ll ans  = inf ;  
+ if(DP[cur][taken] != -1)
+  return DP[cur][taken]   ; 
+   if(taken == 0)
+    ans   =rec(cur + 1 , taken)  ; 
+  for(int i   = 0 ;  i < ar[cur].size() ; ++i)
+  {
+     ans =  min(ans , rec(ar[cur][i] ,taken + 1)  +cost[cur] )  ; 
+      ans =  min(ans , rec(ar[cur][i] ,taken ) )    ; 
+  }
+  return DP[cur][taken] = ans ; 
+} 
+
+int main()
+{
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+
+   cin>>s ; 
+  for(ll i = 0 ;  i< s ; ++i)
+    cin>>arr[i] ;  
+  for(int i  =  0 ;  i < s ; ++i)
+    cin>>cost[i] ;  
+
+  for(int i  =  0 ;  i <  s ; ++i)
+    { 
+      for(int j  =  i + 1 ;  j < s ; ++j  )
+        {
+           if(arr[j] > arr[i])
+           ar[i].push_back(j) ; 
+
+        }
+    }
+    for(int i   = 0 ;   i < s ; ++i)
+      ar[i].push_back(s) ;
+    for(int  i  = 0 ; i < 3001 ; ++i)
+    {
+       for(int j    = 0  ; j  <4 ; ++j)
+        DP[i][j]    =-1 ; 
+    }
+    
+    ll val = rec(0   ,0 ) ; 
+    if(val == inf)
+      cout<<-1 ; 
+    else
+      cout<<val ; 
+ return   0 ;  }
