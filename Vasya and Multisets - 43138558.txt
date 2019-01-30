@@ -1,0 +1,137 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#include <cstdio>
+#define ll    int
+#define MOD 1000000007
+#define inf  20000000000000
+#define eps  0.0000000000001
+using namespace std ; 
+
+ll n ;  
+ll arr[101] ; 
+
+ll DP[101][101][101] ; 
+ll path[101][101][101] ; 
+
+bool rec(ll  cur ,ll nice1 ,ll nice2)
+{
+    if(cur == 101)
+    {
+       if(nice1 == nice2)
+        return true ; 
+      return false ;  
+    }
+   if(DP[cur][nice1][nice2] != -1)
+    return DP[cur][nice1][nice2] ; 
+
+   if(arr[cur] == 0 || arr[cur] == 2)
+    { 
+        path[cur][nice1][nice2] =  0 ;  
+      return rec(cur + 1  ,  nice1 , nice2) ;  
+    }
+  
+  bool a = false ;  
+  bool  b = false ;
+  bool c = false ; 
+  if(arr[cur] == 1)
+  {
+   a = rec(cur + 1 ,  nice1 + 1 ,  nice2) ;  
+   b = rec(cur + 1 ,  nice1 , nice2 + 1) ; 
+  }
+  else 
+  {
+   a =  rec(cur + 1 ,  nice1 + 1 , nice2) ; 
+   b = rec(cur + 1 ,  nice1 , nice2 + 1) ; 
+   c =  rec(cur + 1 , nice1 , nice2) ;  
+  }
+  bool ans  =  (a | b |c) ; 
+
+  if(a)
+    path[cur][nice1][nice2] =  1 ; 
+  else if(b)
+    path[cur][nice1][nice2] =  2 ; 
+  else if(c)
+    path[cur][nice1][nice2] =  0 ; 
+
+  return (DP[cur][nice1][nice2]  = ans) ;  
+}
+
+
+int main()
+{
+   //ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ;
+   cin>>n ;  
+   ll data[n] ;  
+  for(ll i  = 0 ;  i<  n  ;++i)
+  {
+     ll v;  cin>>v ;  
+     arr[v]++ ;  
+     data[i]  =v  ; 
+  }
+  for(ll i  =  0 ; i < 101 ; ++i)
+    for(ll j  =  0 ; j < 101 ; ++j)
+      for(ll k  = 0 ;  k < 101 ; ++k)
+        DP[i][j][k]  = -1 ; 
+
+   queue<string> ans[101] ;    
+   if(!rec(0 , 0 ,0 ))
+   {
+     cout<<"NO\n" ;  
+   }
+   else
+   {
+     cout<<"YES\n" ;  
+      ll  cur =   0  ,  nice1=  0  ,nice2 =  0 ;  
+      while(cur  <= 100)
+      {
+         if(arr[cur] == 0 )
+         {
+           cur++ ;  
+           continue ; 
+         }
+         if(path[cur][nice1][nice2] == 0 )
+         {
+          for(ll jo  =  0 ; jo  < arr[cur] ;  ++jo)
+           ans[cur].push("A") ; 
+           cur++ ;   
+         }
+         else if(path[cur][nice1][nice2] == 1)
+         {
+           ans[cur].push("A") ; 
+          for(ll jo  =  0 ; jo  < arr[cur] - 1 ;  ++jo)
+           ans[cur].push("B") ; 
+           cur++ ;  
+           nice1++ ; 
+         }
+         else
+         {
+           ans[cur].push("B") ; 
+          for(ll jo  =  0 ; jo  < arr[cur] - 1 ;  ++jo)
+           ans[cur].push("A") ;  
+           cur++ ; 
+           nice2++ ;  
+         }
+      }
+
+      for(ll  i  = 0  ; i  <  n ; ++i)
+      {
+        if(ans[data[i]].size() == 0)
+          cout<<"FUCK\n" ;  
+        else
+        { string c =  ans[data[i]].front() ;   
+         ans[data[i]].pop() ;  
+          cout<<c ; }
+
+      }
+   }
+return  0 ; 
+} 
