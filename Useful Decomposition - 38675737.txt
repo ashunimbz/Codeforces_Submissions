@@ -1,0 +1,84 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int 
+#define mod 1000000007
+#define inf  100000000000
+using namespace std ;  
+
+ll n ;  
+vector<ll>adj[100005] ; 
+int root  ; 
+int parent[100005]; 
+vector<int>leafs ; 
+void dfs(int node , int par)
+{
+  if(adj[node].size() == 1 && node != root)
+  	{ 
+  		leafs.push_back(node) ; 
+  		return ; } 
+
+   for(int j : adj[node])
+   {
+   	 if(j == par)
+   	 	continue  ; 
+   	 	parent[j] =  node ;   
+   	 dfs(j  ,  node) ; 
+   }
+}
+
+int main()
+{
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+  cin>>n ; 
+ for(int i  = 0 ;  i< n-1 ; ++i)
+ {
+ 	 ll a , b; 
+ 	 cin>>a>>b ; 
+ 	 adj[a].push_back(b) ;  
+ 	 adj[b].push_back(a) ; 
+ }
+ll mina =  -1  ; 
+for(int i   =1 ;  i <= n ;  ++i)
+	{
+           if( (ll)adj[i].size() > mina)
+           {
+           	  root  = i ;
+           	  mina  =  adj[i].size() ;  
+
+           }
+	}
+dfs(root ,  -1) ; 
+bool ans  =true ; 
+for(int i  = 1 ; i <= n ; ++i)
+{
+	  if(i == root)
+	  	continue ;  
+	  int par = parent[i]  ; 
+	  if(par == root)
+	  	continue ; 
+	  if(adj[par].size() > 2)
+	  {
+	  	 ans = false ; 
+	  }
+}
+if(!ans)
+cout<<"No" ; 
+else
+
+{   
+	cout<<"Yes\n" ; 
+	cout<<leafs.size()<<'\n';
+	for(int i   = 0  ;  i  < leafs.size() ; ++i)
+	{
+		 cout<<root<<" "<<leafs[i]<<"\n";
+	}
+}
+return  0 ;  }
