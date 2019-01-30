@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int 
+#define mod 1000000007
+#define inf  100000000000000
+using namespace std ;  
+
+int main()
+{
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+  int n ; cin>>n  ; 
+  ll maxa  = -1 ; 
+  ll maxb  = -1 ; 
+  unordered_map<ll,ll>um;
+  pair<ll ,ll>arr[n] ;  
+  for(int  i =    0 ;  i < n ; ++i)
+  {
+      ll a  ,b ; cin>>a>>b ;
+      arr[i]  ={a , b} ;   
+      maxa   = max(maxa , a)  ;  
+      maxb  = max(maxb  ,b) ;  
+  } 
+
+sort(arr , arr + n ,  [](pair<ll ,ll > a  , pair<ll , ll > b){
+  if(a.first == b.first)
+    return a.second < b.second ;  
+return a.first < b.first ;  
+}) ; 
+
+ll best = -inf  ; 
+
+for(int  i  = 0 ;  i < n ; ++i)
+{
+     if(arr[i].second >= best)
+        best  = arr[i].second  ; 
+    else
+        best    = arr[i].first ;  
+}
+cout<<best  ; 
+
+return  0 ;  }
