@@ -1,0 +1,32 @@
+#include <iostream>
+#include <algorithm>
+#include<vector>
+#include<set>
+using namespace std;
+
+int main()
+{
+     int n ; cin>>n;
+     int value ;
+     vector<int>v;
+     set<int>s;
+int count =  0 ;
+     for(int i = 0 ;  i< n ; ++i)
+     {
+         cin>>value;
+         v.push_back(value);
+
+     }
+
+    sort(v.begin() , v.end()) ;
+    for(int i = 1 ;  i< n - 1; ++i)
+    {
+       if((v[i] > v[0]) && (v[i] < v[n-1]))
+        count++;
+
+    }
+
+    cout<<count ;
+
+    return 0;
+}
