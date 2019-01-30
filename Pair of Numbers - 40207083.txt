@@ -1,0 +1,128 @@
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <climits>
+#include <iomanip>
+#define ll    long long int 
+#define MOD 1000000007
+#define inf  2000000000
+#define eps  0.0000000000001
+using namespace std ; 
+
+ll mina[300005][21] ; 
+ll GCD[300005][21] ; 
+ll arr[300005] ; 
+ll n ;  
+
+
+ll findmin(ll l ,ll r)
+{
+  ll ans =  inf  ; 
+  
+      for(ll po  = 20 ; po >= 0  ; --po)
+      {
+         if(l + (1<<po) - 1  <= r )
+         {
+           ans =  min(ans , mina[l][po]) ; 
+           l += (1<<po);
+         }
+      }
+   return ans ;
+}
+
+ll findgcd(ll l ,ll r)
+{
+  ll ans =  0  ; 
+  
+      for(ll po  = 20 ; po >= 0  ; --po)
+      {
+         if(l + (1<<po) - 1  <= r )
+         {
+           ans =  __gcd(ans , GCD[l][po]) ; 
+           l += (1<<po);
+         }
+      }
+   return ans ;
+}
+bool ok(ll k)
+{
+  ll p  = 0 ;  
+  while(p < n )
+  {
+     ll ende = p + k -1 ;  
+     if(ende >= n  )
+      return false ; 
+     if(findgcd(p , ende) == findmin(p ,ende))
+      { 
+        return true ;
+      }
+     p++; 
+  }
+  return false ; 
+}
+
+ll bin()
+{
+  ll lo = 0 ,  hi = n ; 
+   while(lo < hi)
+  {
+
+      ll mid = (lo + hi + 1)/2 ;   
+      if(ok(mid))
+        lo  = mid ;  
+      else
+        hi =mid -1 ; 
+  }
+  return lo ; 
+}
+
+
+int main()
+{
+   ios::sync_with_stdio(false);cin.tie(0) ;cout.tie(0) ; 
+   cin>>n ;
+   for(int i  = 0  ; i<  n ; ++i)cin>>arr[i] ; 
+
+  for(int i   = 0   ; i <  n ; ++i)
+   { 
+    mina[i][0] = arr[i] ;
+    GCD[i][0]  = arr[i] ; 
+  } 
+
+  for(int i   = 1   ;  i <= 20 ; ++i)
+    for(int   j =  0 ;  j <= n - (1<<i) ; ++j)
+     { 
+      mina[j][i]   = min( mina[j][i-1] , mina[j +(1 <<(i-1))][i-1] )  ;  
+      GCD[j][i]   = __gcd( GCD[j][i-1] ,GCD[j +(1 <<(i-1))][i-1] )  ;
+    }
+   ll yo = bin() - 1;
+   ll val = 0  ; 
+   vector<ll>ans ; 
+   for(ll u  = 0 ;  u < n  ;++u)
+   {
+       ll t = u + yo ;  
+       if(t >= n  )break ; 
+       if(findgcd(u,t) == findmin(u,t))
+       {
+         val++ ; 
+         ans.push_back(u+1) ; 
+       }
+   }
+   cout<<val<<" "<<yo<<"\n" ; 
+   for(ll p  : ans)
+    cout<<p<<" " ; 
+
+   return   0  ;
+ 
+ }
+
+
+
+
