@@ -1,0 +1,93 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <map>
+#include <set>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <numeric>
+#include <string>
+#include <set>
+#include <cmath>
+#include <stack>
+#define MOD 1000000007
+#define ll  long long int
+using namespace std;
+int memo[101][2][3] ;
+int n;
+int rec(int cur  , int arr[] ,int change,int currentactivity)
+{
+
+    if(cur >= n )
+    return 0 ;
+
+    if(memo[cur][change][currentactivity]  != -1)
+        return memo[cur][change][currentactivity]  ;
+
+    if(arr[cur] == 0 )
+        return memo[cur][change][currentactivity] =1 + rec(cur + 1 , arr ,  0,0) ;
+    if(arr[cur] == 1)
+    {
+        if(currentactivity == 1 && change == 1)
+        return memo[cur][change][currentactivity]  = (1 + rec(cur + 1 , arr , 0,0));
+        else
+            return memo[cur][change][currentactivity]  = min(1 + rec(cur + 1 , arr,0,0) , rec(cur + 1 , arr  ,1,1)) ;
+    }
+
+      if(arr[cur] == 2)
+    {
+        if(currentactivity == 2 && change == 1)
+        return memo[cur][change][currentactivity]  = (1 + rec(cur + 1 , arr , 0,0));
+        else
+            return memo[cur][change][currentactivity] = min(1 + rec(cur + 1 , arr,0,0) , rec(cur + 1 , arr  ,1,2)) ;
+    }
+
+    if(arr[cur] == 3)
+    {
+        int a  =1 + rec(cur+1 ,arr,0,0) ;
+        int b ;
+        if(change == 1)
+        {
+            if(currentactivity == 1)
+             b = rec(cur+1,arr,1,2) ;
+             else
+                b= rec(cur + 1 , arr,1,1) ;
+        }
+        else{
+
+           b = min(rec(cur + 1 ,arr,1,2) , rec(cur +1 , arr,1,1)) ;
+
+
+        }
+        return memo[cur][change][currentactivity] = min(a, b) ;
+
+
+
+    }
+
+
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);cin.tie(0) ;
+    cin>>n ;
+    int arr[n] ;
+    for(int i = 0 ; i < 101 ; ++i)
+    {
+        for(int j = 0 ;  j < 2 ; ++j)
+        {
+            for(int k =  0 ; k < 3 ; ++k)
+                memo[i][j][k] = -1 ;
+        }
+    }
+    for(int  i =  0 ; i< n ; ++i)
+        cin>>arr[i] ;
+
+cout<<rec(0,arr,0,0) ;
+
+return 0
+
+;}
