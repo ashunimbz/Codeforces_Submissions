@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <map>
+#include <set>
+#include <cmath>
+#include <iomanip>
+#include <climits>
+#define ll long long
+#define MOD 1000000007
+#define IOS ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie() ;
+using namespace std;
+int main(){
+IOS
+ll n , k  ;
+cin>>n>>k  ;
+
+ll  y  =  n/k  ;
+if(y % 2 != 0)
+cout<<"YES" ;
+else
+cout<<"NO" ;
+
+    return 0;
+}
