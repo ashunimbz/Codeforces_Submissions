@@ -1,0 +1,103 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <map>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
+#include <iomanip>
+#define ll long long int 
+#define mod 1000000007
+#define inf  100000000000
+using namespace std ;  
+
+struct p{
+
+	ll    u ,v , index ;  
+} ; 
+
+map< ll ,ll >mp  ;  
+
+
+int main()
+{
+  ios::sync_with_stdio(false) ;cin.tie(0) ;cout.tie(0);
+  ll n ;  
+  cin>>n ;  
+  p arr[n] ; 
+  for(int i  = 0  ; i < n ; ++i)
+  {
+  	 ll  a  , b ; 
+  	 cin>>a>>b ;  
+  	 arr[i].u =  a ; 
+  	 arr[i].index =  i  ; 
+  	 arr[i].v  = b;  
+  }
+  if(n == 1)
+  {
+  	 cout<<-1<<" "<<-1<<'\n'  ;
+  	return  0 ;
+  }
+  sort(arr , arr + n , [](struct p a , struct p b  )
+  {
+  	if(a.u == b.u)
+  		return a.v > b.v ;  
+  	return a.u < b.u ; 
+  } )  ;
+  ll yo = arr[n-1].v ; 
+
+  mp.insert({ yo, arr[n-1].index}) ; 
+  bool ans = false ; 
+  ll firs  ,sec ; 
+  for(int i   =  n -2 ; i >= 0 ; --i)
+  {
+  
+  	ll v2 = arr[i].v  ; 
+  	ll to = arr[i].index ;  
+  	auto po   = mp.lower_bound(v2) ;  
+  	if(po != mp.end() )
+  	{
+       if( (*po).first == v2)
+       {
+       	          ans  = true ;
+         firs  = to  ; 
+         sec   = (*po).second ; 
+         break ;  
+       }
+       else if( po != mp.begin() )
+       {
+       	 --po ;
+       	
+ 
+       	  ans  = true ;
+         firs  = to  ; 
+         sec   = (*po).second ; 
+         break ;  
+       }
+  	}
+  	mp.insert({  v2,to}) ; 
+  }
+  if(ans)
+  {
+  	cout<<sec + 1<<" "<<firs + 1<<'\n' ; 
+  }
+  else {
+  	ll yo1 = arr[n-1].u  ; 
+  	ll yo2 = arr[n-1].v ; 
+  	ll upto =  arr[n-1].index ; 
+    for(int i   = 0  ; i < n-1   ; ++i)
+    {
+    	ll yo11 = arr[i].u  ; 
+  	ll yo21 = arr[i].v ; 
+  	ll uptoo =  arr[i].index ;
+  	if(yo1 >= yo11 && yo2 <= yo21)
+  	{
+  		 cout<<upto + 1<<" "<<uptoo + 1<<"\n" ; 
+  		 return  0 ;
+  	} 
+    } 
+  	cout<<-1<<" "<<-1<<'\n';
+   }
+  return  0 ;  }
