@@ -1,0 +1,61 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <unordered_set>
+#include <algorithm>
+#include <tuple>
+#include <cmath>
+#define ll long long
+using namespace std;
+
+struct pro{
+int first ,second ,profit ;
+};
+
+
+
+int main()
+{
+   ll n, f ;
+   cin>>n>>f ;
+   vector<pro >arr(n);
+   ll a , b;
+   for(ll i = 0 ; i < n  ; ++i)
+   {
+    cin>>a>>b ;
+    arr[i].first = a;
+    arr[i].second = b ;
+      if( a >= b )
+        arr[i].profit = 0 ;
+      else if(a==0)
+      arr[i].profit = 0 ;
+      else
+      {
+        if(2*a > b)
+            arr[i].profit = b - min(a,b) ;
+        else
+            arr[i].profit = 2*a - min(a,b) ;
+      }
+   }
+
+   sort( arr.begin(), arr.end() , []( struct pro a,struct pro b) {
+
+    return  a.profit > b.profit ;
+
+      }) ;
+      ll ans = 0 ;
+      for(int i = 0 ; i < f; ++i )
+      {
+
+        if(2 * arr[i].first > arr[i].second)
+            ans += arr[i].second  ;
+        else
+            ans += 2*arr[i].first ;
+      }
+      for(int  j = f ; j < n ;++j)
+      {
+          ans += min(arr[j].first ,arr[j].second) ;
+      }
+      cout<<ans ;
+   return  0 ;
+}
