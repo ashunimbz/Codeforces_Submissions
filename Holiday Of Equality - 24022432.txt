@@ -1,0 +1,25 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    vector<int>v ;
+    int n ;  cin>>n;
+    int value ;
+    for(int i  = 0 ;  i < n ; ++i)
+    {
+        cin>>value ;
+        v.push_back(value) ;
+    }
+    auto maz = max_element(v.begin() , v.end()) ;
+    int maxv=  *maz ;
+    int ans =  0 ;
+      for(int i  = 0 ;  i < n ; ++i)
+    {
+       ans += (maxv - v[i])  ;
+    }
+  cout<<ans ;
+    return 0;
+}
